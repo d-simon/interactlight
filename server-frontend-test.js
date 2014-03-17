@@ -1,3 +1,5 @@
+var config = require('./config.js');
+
 var http     = require('http')
   , connect  = require('connect')
   , express  = require('express')
@@ -26,13 +28,12 @@ io.sockets.on('connection', function(socket) {
 
 })
 
-
 var twitter = require('ntwitter');
 var twit = new twitter({
-    consumer_key: 'hJX4AUlpQQPLzxSlJrupBQ',
-    consumer_secret: 'H2KEcT40VKSDcj7kfbGIxEdOBsgbG798bwSAl8ClEmQ',
-    access_token_key: '327060292-mGH02XJ4vu6kslc7FYxBtz6sxyXnKr9ypMj9RGqM',
-    access_token_secret: '5jn9fdIlYGwVXIeNtnZDuB0OkW6id73gPR516DYfyP7R4'
+    consumer_key: config.twitter.consumer_key,
+    consumer_secret: config.twitter.consumer_secret,
+    access_token_key: config.twitter.access_token_key,
+    access_token_secret: config.twitter.access_token_secret
 });
 // language: ['en,ru'],
 // twit.stream('statuses/filter', {filter_level:'medium', track: ['ukraine' , 'obama ukraine', 'krim obama', 'obama']}, function(stream) {
