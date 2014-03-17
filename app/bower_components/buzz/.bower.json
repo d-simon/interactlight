@@ -1,0 +1,30 @@
+{
+  "name": "buzz",
+  "version": "1.1.0",
+  "description": "Buzz, a Javascript HTML5 Audio library",
+  "homepage": "http://buzz.jaysalvat.com",
+  "author": "Jay Salvat",
+  "license": "MIT",
+  "main": "dist/buzz.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jaysalvat/buzz.git"
+  },
+  "keywords": [
+    "html5",
+    "audio",
+    "library",
+    "buzz",
+    "buzz.js"
+  ],
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.0",
+    "commit": "f6fdb201d1d1f2c72540db05cb6e1fa0138b2853"
+  },
+  "_source": "git://github.com/jaysalvat/buzz.git",
+  "_target": "~1.1.0",
+  "_originalSource": "buzz",
+  "_direct": true
+}
