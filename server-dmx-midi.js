@@ -27,7 +27,6 @@ console.log(output.getPortCount(), output.getPortName(1));
 
 output.openPort(0);
 
-
 function generateMidiTable () {
     var returnA = [];
     for (var i = 0; i < 12; i++) {
@@ -50,28 +49,18 @@ var midiTable = generateMidiTable()
 twit.stream('statuses/sample', {filter_level:'none'}, function(stream) {
     stream.on('data', function(data) {
         if (data) console.log(data.user.name, data.text.replace(/(\r\n|\n|\r)/gm,""));
-        // Send a MIDI message.
-        // throttle++;
-        // if (throttle > 0) {
-        //     throttle = 0;
             workerPool.go(function (done, workerIndex) {
-
 
                 var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
                   , note = midiTable[key[timezoneKey % key.length]][~~(timezoneKey / key.length)];
 
-                  console.log(36+note);
-
+                console.log(36+note);
+                // Send a MIDI message.
                 output.sendMessage([144,36+note,100]);
                 setTimeout(function () {
+                    // Send Note End
                     output.sendMessage([128,36+note,100]);
                 },250);
-
-
-                // output.sendMessage([144,25+workerIndex,100]);
-                // setTimeout(function () {
-                //     output.sendMessage([128,25+workerIndex,100]);
-                // },250);
 
                 console.log();
                 var inTo = {};
@@ -93,25 +82,4 @@ twit.stream('statuses/sample', {filter_level:'none'}, function(stream) {
         // }
     });
 });
-
-// twit.stream('statuses/filter', {filter_level:'none', track: ['russia', 'putin ukraine', 'krim putin', 'putin']}, function(stream) {
-//     stream.on('data', function(data) {
-//         if (data) console.log('russia ', data.text.replace(/(\r\n|\n|\r)/gm,""));
-//         workerPool.go(function (done, workerIndex) {
-//             var inTo = {};
-//                 inTo[workerIndex*3] = 50;
-//                 inTo[workerIndex*3+1] = 0;
-//                 inTo[workerIndex*3+2] = 0;
-//             var outTo = {};
-//                 outTo[workerIndex*3] = 0;
-//                 outTo[workerIndex*3+1] = 0;
-//                 outTo[workerIndex*3+2] = 0;
-//             var animation = new A();
-//             animation
-//                 .add(inTo, 100, { })
-//                 .add(outTo, 200, { })
-//                 .run(dmx.universes[0], function () { done(workerIndex); });
-//         });
-//     });
-// });
 

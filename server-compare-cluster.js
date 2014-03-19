@@ -32,7 +32,7 @@ if (cluster.isMaster) {
     var track = process.env['KEYWORD']
       , worker_id = process.env['WORKER_ID'];
     twit.stream('statuses/filter', {track:track, filter_level: 'low'}, function(stream) {
-        stream.on('data', function(data) {
+        stream.on('data', function (data) {
            console.log(worker_id, data.filter_level, track, data.text);
         });
     });
