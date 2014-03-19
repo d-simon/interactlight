@@ -1,6 +1,6 @@
 var config = require('./config.js')
   , Artnet = require('artnet-node')
-  , PixelScreen = require('../pixelscreen/index.js');
+  , PixelScreen = require('pixelscreen');
 
 var omc1 = Artnet.Client.createClient(config.omc.addresses[0], 6454) // 12x12
   , omc2 = Artnet.Client.createClient(config.omc.addresses[1], 6454);// 12x12
