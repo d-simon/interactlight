@@ -109,7 +109,7 @@ twit.stream('statuses/filter', {filter_level:'none', locations:'-180,-90,180,90'
                 obj2[led*3+2] = Math.min(dmx2.universes[0].get(led*3+2) + 5, 50);
             }
         }
-        virtualScreen.update(array);
+        virtualScreen.updateObj(array);
         dmx.update(0, obj);
         dmx2.update(0, obj2);
 
