@@ -5,4 +5,9 @@ module.exports = {
         access_token_key: '',
         access_token_secret: ''
     }
+    omc: {
+        addresses: [
+            // IP Adresses as Strings
+        ]
+    }
 };
