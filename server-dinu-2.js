@@ -12,8 +12,7 @@ var omc1 = Artnet.Client.createClient(config.omc.addresses[0], 6454) // 12x12
   , omc5 = Artnet.Client.createClient(config.omc.addresses[4], 6454) // 12x12
   , omc6 = Artnet.Client.createClient(config.omc.addresses[5], 6454);// 12x12
 
-var pixelScreen = new PixelScreen({ width: 36, height: 12, channels: 3 })
-  , pixelScreen2 = new PixelScreen({ width: 36, height: 12, channels: 3 });
+var pixelScreen = new PixelScreen({ width: 24, height: 36, channels: 3 });
 
 pixelScreen.registerScreen('omc1', { x: 0, y: 0, width: 12, height: 12, channels: 3, dmx: true },
         function callback (err, pixelImage) {
@@ -25,22 +24,22 @@ pixelScreen.registerScreen('omc1', { x: 0, y: 0, width: 12, height: 12, channels
             if (err) console.log(err);
             omc2.send(pixelImage);
         })
-    .registerScreen('omc3', { x: 24, y: 0, width: 12, height: 12, channels: 3, dmx: true  },
+    .registerScreen('omc3', { x: 0, y: 12, width: 12, height: 12, channels: 3, dmx: true  },
         function callback (err, pixelImage) {
             if (err) console.log(err);
             omc3.send(pixelImage);
-        });
-pixelScreen2.registerScreen('omc4', { x: 0, y: 0, width: 12, height: 12, channels: 3, dmx: true  },
+        })
+    .registerScreen('omc4', { x: 12, y: 12, width: 12, height: 12, channels: 3, dmx: true  },
         function callback (err, pixelImage) {
             if (err) console.log(err);
             omc4.send(pixelImage);
         })
-    .registerScreen('omc5', { x: 12, y: 0, width: 12, height: 12, channels: 3, dmx: true  },
+    .registerScreen('omc5', { x: 0, y: 24, width: 12, height: 12, channels: 3, dmx: true  },
         function callback (err, pixelImage) {
             if (err) console.log(err);
             omc5.send(pixelImage);
         })
-    .registerScreen('omc6', { x: 24, y: 0, width: 12, height: 12, channels: 3, dmx: true  },
+    .registerScreen('omc6', { x: 12, y: 24, width: 12, height: 12, channels: 3, dmx: true  },
         function callback (err, pixelImage) {
             if (err) console.log(err);
             omc6.send(pixelImage);
@@ -58,126 +57,95 @@ input.openPort(1);
 // 40 41 42 43
 // 36 37 38 39
 
-var currentNote = [-1,-1]
+var currentNote = -1
   , currentIntensity = 127;
 input.on('message', function (deltaTime, message) {
     console.log('m:' + message + ' d:' + deltaTime);
-    //console.log(message, message[1]);
-    var screen = ~~(message[1] / 12);
+    // console.log(message, message[1]);
     if (message[0] === 176) {
         console.log('current', currentIntensity, message[2]);
         currentIntensity = message[2];
-        for (var i = 0; i < currentNote.length; i++) {
-            var relNote = currentNote[i] % 12;
-            showImageFromNote(relNote, i);
-        }
-    } else if (message[1] === currentNote[screen] && message[0] === 144 && message[2] !== 0) {
-        showImage('black', screen);
-        currentNote[screen] = -1;
-    } else if (message[0] === 144 && message[1] !== currentNote[screen] && message[2] !== 0) {
-        currentNote[screen] = message[1];
-        var relNote = currentNote[screen] % 12;
-        showImageFromNote(relNote, screen);
+        var relNote = currentNote % 12;
+        showImageFromNote(relNote);
+    } else if (message[1] === currentNote && message[0] === 144 && message[2] !== 0) {
+        showImage('black');
+        currentNote = -1;
+    } else if (message[0] === 144 && message[1] !== currentNote && message[2] !== 0) {
+        currentNote = message[1];
+        var relNote = currentNote % 12;
+        showImageFromNote(relNote);
     }
 });
 
 
 
 var files = [
-        './media/abspann_black_36_12.png',
-        './media/abspann_white_36_12.png',
-        './media/abspann_pex_36_12.png',
-        './media/abspann_martin_36_12.png',
-        './media/abspann_schenk_36_12.png',
-        './media/abspann_basil_36_12.png',
-        './media/abspann_oberli_36_12.png',
-        './media/abspann_cili_36_12.png',
-        './media/abspann_locher_36_12.png',
+        './media/abspann__white_24_36.png',
+        './media/abspann__black_24_36.png',
+        './media/abspann__after_the_dark_24_36.png',
+        './media/abspann__pex_1_24_36.png',
+        './media/abspann__pex_2_24_36.png',
+        './media/abspann__pex_3_24_36.png',
+        './media/abspann__pex_4_24_36.png'
     ]
 
-function showImageFromNote (note, screen) {
-           //console.log(relNote);
+function showImageFromNote (note) {
         switch(note) {
             case 0:
-                showImage('white', screen);
+                showImage('white');
                 break;
             case 1:
-                showImage('black', screen);
+                showImage('black');
                 break;
             case 2:
-                showImage('schenk', screen);
-                break;
-            case 3:
-                showImage('pex', screen);
+                showImage('afterTheDark');
                 break;
             case 4:
-                showImage('martin', screen);
+                showImage('pex1');
                 break;
             case 5:
-                showImage('oberli', screen);
+                showImage('pex2');
                 break;
             case 7:
-                showImage('basil', screen);
+                showImage('pex3');
                 break;
             case 9:
-                showImage('locher', screen);
-                break;
-            case 11:
-                showImage('cili', screen);
+                showImage('pex4');
                 break;
             default:
                 break;
         }
 }
-function showImage (str, screen) {
-    console.log(screen, str);
+function showImage (str) {
     switch(str) {
-        case 'black':
-            sendImage(files[0], screen);
-            break;
         case 'white':
-            sendImage(files[1], screen);
+            sendImage(files[0]);
             break;
-        case 'pex':
-            sendImage(files[2], screen);
+        case 'black':
+            sendImage(files[1]);
             break;
-        case 'martin':
-            sendImage(files[3], screen);
+        case 'afterTheDark':
+            sendImage(files[2]);
             break;
-        case 'schenk':
-            sendImage(files[4], screen);
+        case 'pex1':
+            sendImage(files[3]);
             break;
-        case 'basil':
-            sendImage(files[5], screen);
+        case 'pex2':
+            sendImage(files[4]);
             break;
-        case 'oberli':
-            sendImage(files[6], screen);
+        case 'pex3':
+            sendImage(files[5]);
             break;
-        case 'cili':
-            sendImage(files[7], screen);
-            break;
-        case 'locher':
-            sendImage(files[8], screen);
+        case 'pex4':
+            sendImage(files[6]);
             break;
         default:
             break;
     }
 }
-function sendImage (filePath, screen) {
+function sendImage (filePath) {
     i2p(filePath, { pixelsCallback: convertI2PtoPixelScreen }, function (err, pixels) {
-        switch(screen) {
-            case 0:
-                console.log('screen1');
-                pixelScreen.update(pixels);
-                break;
-            case 1:
-                console.log('screen2');
-                //console.log('pixels:', pixels)
-                pixelScreen2.update(pixels);
-                break;
-            default:
-                break;
-        }
+        pixelScreen.update(pixels);
     });
 }
 
