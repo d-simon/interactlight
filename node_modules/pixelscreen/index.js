@@ -62,6 +62,16 @@ PixelScreen.prototype.unregisterScreen = function (name) {
     return this;
 };
 
+PixelScreen.prototype.forceUpdate = function () {
+    for (screen in this.screens) {
+        var screen = this.screens[screen]
+          , pixelImage = this.getImage(screen.name);
+        if(screen.dmx === true) pixelImage = this.arrayToDMX(pixelImage);
+        screen.callback(null, pixelImage);
+    }
+    return this;
+};
+
 PixelScreen.prototype.update = function (input) {
     if (!input || !input.length) throw new Error('No input!');
     if (input[0][0].length !== this.channels) throw new Error('Invalid no. of channels!');
@@ -71,8 +81,8 @@ PixelScreen.prototype.update = function (input) {
 
     this.image = _.cloneDeep(input);
     for (screen in this.screens) {
-        var screen = this.screens[screen],
-            pixelImage = this.getImage(screen.name);
+        var screen = this.screens[screen]
+          , pixelImage = this.getImage(screen.name);
         if(screen.dmx === true) pixelImage = this.arrayToDMX(pixelImage);
         screen.callback(null, pixelImage);
     }
