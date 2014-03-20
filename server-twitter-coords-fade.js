@@ -17,8 +17,7 @@ var coordinates = [
     // -74,40.4,-72.5,41.2                    // New York (Manhatten landscape)
     // -0.510375,51.333117,0.334015,51.688469 // London
     // 31.12,13.75,62.21,32.34                // Saudi Arabia
-    // -180,-60,180,80                       // World
-     -180,-80,180,90                       // World
+     -180,-60,180,80                       // World
     //-13.64,35.81,42.22,58.67
 ];
 
@@ -35,9 +34,8 @@ function normalizeCoordinates (A, B, C) {
 }
 
 var words = [
-    'cats',
-    'cat',
-    'dogs'
+    'obama',
+    'ukraine'
 ];
 
 function hasKeyword (text) {
@@ -73,9 +71,9 @@ twit.stream('statuses/filter', { filter_level:'none', locations:coordinates.join
             if (0 <= array[0].y && array[0].y < screenHeight && 0 <= array[0].x && array[0].x < screenWidth) {
                 var led = pixelScreen.image[array[0].y][array[0].x];
 
-                led[0] = Math.min(led[0] + 200, 255);
-                led[1] = Math.min(led[1] + 200, 255);
-                led[2] = Math.min(led[2] + 200, 255);
+                led[0] = Math.min(led[0] + 1, 255);
+                led[1] = Math.min(led[1] + 1, 255);
+                led[2] = Math.min(led[2] + 1, 255);
                 pixelScreen.forceUpdate();
             } else {
                 console.log('Out of Bounds!', array,  data.geo);
@@ -110,20 +108,23 @@ function reduceUntilMinOrZero (inputVal, min, n) {
     return (inputVal > min) ? Math.max(inputVal - n,min) : min;
 }
 
-var reduceInterval =  setInterval(function () {
-    var array = [];
-    for (var i = 0; i < screenHeight; i++) {
-        array.push([]);
-        for (var j = 0; j < screenWidth; j++) {
-            array[i].push([
-                reduceUntilMinOrZero(pixelScreen.image[i][j][0],3,15),
-                reduceUntilMinOrZero(pixelScreen.image[i][j][1],3,15),
-                reduceUntilMinOrZero(pixelScreen.image[i][j][2],15,15)
-            ]);
-        }
-    }
-    pixelScreen.update(array);
-}, 33);
+// var reduceInterval =  setInterval(function () {
+//     var array = [];
+//     for (var i = 0; i < screenHeight; i++) {
+//         array.push([]);
+//         for (var j = 0; j < screenWidth; j++) {
+//             array[i].push([
+//                 // reduceUntilMinOrZero(pixelScreen.image[i][j][0],3,15),
+//                 // reduceUntilMinOrZero(pixelScreen.image[i][j][1],3,15),
+//                 // reduceUntilMinOrZero(pixelScreen.image[i][j][2],15,15)
+//                 reduceUntilZero(pixelScreen.image[i][j][0],1),
+//                 reduceUntilZero(pixelScreen.image[i][j][1],1),
+//                 reduceUntilZero(pixelScreen.image[i][j][2],1)
+//             ]);
+//         }
+//     }
+//     pixelScreen.update(array);
+// }, 10000);
 
 // var saveInterval = setInterval(function () {
 //     saveToJSON(pixelScreen.image);

@@ -47,12 +47,30 @@ function hasKeyword (text) {
     return false;
 }
 
+
+var Player = require('player');
+
+// create player instance
+var player = new Player('./app/birldsamples.mp3');
+
+// play now and callback when playend
+
+
+var soundCount = 0;
 //twit.stream('statuses/sample', function (stream) {
 twit.stream('statuses/filter', { filter_level:'none', locations:coordinates.join(',') }, function(stream) {
     stream.on('data', function(data) {
         if (data) console.log(data.user.name, data.text.replace(/(\r\n|\n|\r)/gm,""));
         if (hasKeyword(data.text)) {
             console.log('HAS KEYWORD'); console.log('HAS KEYWORD'); console.log('HAS KEYWORD');
+        }
+
+        soundCount++;
+        if (soundCount >= 10) {
+            soundCount = 0;
+            player.play(function(err, player){
+                console.log('playend!')
+            });
         }
         var array = [];
         if (data.geo) {
@@ -125,24 +143,24 @@ var reduceInterval =  setInterval(function () {
     pixelScreen.update(array);
 }, 33);
 
-// var saveInterval = setInterval(function () {
-//     saveToJSON(pixelScreen.image);
-// },5000);
+    // var saveInterval = setInterval(function () {
+    //     saveToJSON(pixelScreen.image);
+    // },5000);
 
 
-// function loadFromJSON () {
-//     var returnData;
-//     fs.readFile('worldmap.json', function (err, data) {
-//         if (err) console.log(err);
-//         console.log('worldmap loaded');
-//         if (data) pixelScreen.update(JSON.parse(data));
-//     });
-// }
-// loadFromJSON();
+    // function loadFromJSON () {
+    //     var returnData;
+    //     fs.readFile('worldmap.json', function (err, data) {
+    //         if (err) console.log(err);
+    //         console.log('worldmap loaded');
+    //         if (data) pixelScreen.update(JSON.parse(data));
+    //     });
+    // }
+    // loadFromJSON();
 
-// function saveToJSON (array) {
-//     // fs.writeFile('worldmap.json', JSON.stringify(array, undefined, 2), 'utf8', function (err) {
-//     fs.writeFile('worldmap.json', JSON.stringify(array), 'utf8', function (err) {
-//         if(err) console.log(err);
-//     });
-// }
+    // function saveToJSON (array) {
+    //     // fs.writeFile('worldmap.json', JSON.stringify(array, undefined, 2), 'utf8', function (err) {
+    //     fs.writeFile('worldmap.json', JSON.stringify(array), 'utf8', function (err) {
+    //         if(err) console.log(err);
+    //     });
+    // }
