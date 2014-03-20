@@ -54,6 +54,10 @@ twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'no
             else if (has('london')) { coords = coordinates['london']; }
             else if (has('arabia') || has('saudi')) { coords = coordinates['arabia']; }
             else if (has('europe') || has('eu')) { coords = coordinates['europe']; }
+            else if (has('switzerland') || has('swiss')) { coords = coordinates['switzerland']; }
+            else if (has('ukraine')) { coords = coordinates['ukraine']; }
+            else if (has('school')) { coords = coordinates['school']; }
+            else if (has('zuerich') || has('zueri') || has('z%FCri')) { coords = coordinates['zuerich']; }
             else { coords = coordinates['world']; }
 
             showImage('black', function (err) {
