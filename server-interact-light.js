@@ -30,10 +30,33 @@ twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'no
                            .split(' ')
                            .join('');
         console.log(cmd);
-        function has (keyword) {
-            return cmd.indexOf(keyword) > -1;
-        }
 
+        // Send a MIDI message.
+        output.sendMessage([144,45,100]);
+        setTimeout(function () {
+            // Send Note End
+            output.sendMessage([128,45,100]);
+        },250);
+
+        function hasKeyword (str, keyword) {
+            return str.indexOf(keyword) > -1;
+        }
+        function has (keyword) {
+            return hasKeyword(cmd,keyword);
+        }
+        function getCoords () {
+            var returnCoords;
+            if (has('ny') || (has('new') && has('york')) || has('newyork')) { returnCoords = coordinates['newyork']; }
+            else if (has('london')) { returnCoords = coordinates['london']; }
+            else if (has('arabia') || has('saudi')) { returnCoords = coordinates['arabia']; }
+            else if (has('europe') || has('eu')) { returnCoords = coordinates['europe']; }
+            else if (has('switzerland') || has('swiss')) { returnCoords = coordinates['switzerland']; }
+            else if (has('ukraine')) { returnCoords = coordinates['ukraine']; }
+            else if (has('school')) { returnCoords = coordinates['school']; }
+            else if (has('zuerich') || has('zueri') || has('z%FCri')) { returnCoords = coordinates['zuerich']; }
+            else { returnCoords = coordinates['world']; }
+            return returnCoords;
+        }
 
         // Black
         if (has('black')) {
@@ -49,26 +72,49 @@ twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'no
         } else if (has('world') || has('map')) {
             worldMap.stop();
             console.log('map!');
-            var coords;
-            if (has('ny') || (has('new') && has('york')) || has('newyork')) { coords = coordinates['newyork']; }
-            else if (has('london')) { coords = coordinates['london']; }
-            else if (has('arabia') || has('saudi')) { coords = coordinates['arabia']; }
-            else if (has('europe') || has('eu')) { coords = coordinates['europe']; }
-            else if (has('switzerland') || has('swiss')) { coords = coordinates['switzerland']; }
-            else if (has('ukraine')) { coords = coordinates['ukraine']; }
-            else if (has('school')) { coords = coordinates['school']; }
-            else if (has('zuerich') || has('zueri') || has('z%FCri')) { coords = coordinates['zuerich']; }
-            else { coords = coordinates['world']; }
-
+            var coords = getCoords();
             showImage('black', function (err) {
                 // Safe Delay for Artnet
                 setTimeout(function () {
-                    worldMap.start(coords);
+                    worldMap.start(coords, false, function tweetCallback (data) {
+
+                        var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
+                          , note = midiTable[key[timezoneKey % key.length]][~~(timezoneKey / key.length)];
+
+                        //console.log(36+note);
+                        // Send a MIDI message.
+                        setTimeout(function () {
+                            output.sendMessage([144,40+note,100]);
+                            setTimeout(function () {
+                                // Send Note End
+                                output.sendMessage([128,40+note,100]);
+                            },250);
+                        },Math.random()*1000);
+
+                    });
                 }, 10);
             });
         }
     });
 });
+
+var midi = require('midi');
+var output = new midi.output();
+console.log(output.getPortCount(), output.getPortName(0));
+output.openPort(0);
+function generateMidiTable () {
+    var returnA = [];
+    for (var i = 0; i < 12; i++) {
+        var array = [];
+        for (var j = 0; j < 11; j++) {
+            array.push(i + j*12);
+        };
+        returnA.push(array);
+    }
+    return returnA;
+}
+var midiTable = generateMidiTable()
+  , key = [0,2,4,5,7,9,11]; // C dur
 
 
 var i2p = require('image2pixels');

@@ -26,8 +26,10 @@ WorldMap.prototype.normalizeCoordinates = function(A, B, C) {
     return [(C[0] - A[0]) / (B[0] - A[0]), (C[1] - B[1]) / (A[1] - B[1])];
 };
 
-WorldMap.prototype.start = function (coords) {
+WorldMap.prototype.start = function (coords, slow, cb) {
     var that = this;
+    var slowMode = !!slow;
+    var callback = (typeof cb === 'function') ? cb : false;
     if (coords && coords.length === 4) { this.coordinates = coords; } else { this.coordinates = this.defaultCoordinates; }
     twit.stream('statuses/filter',
             {
@@ -39,7 +41,7 @@ WorldMap.prototype.start = function (coords) {
                 that.running = true;
 
                 stream.on('data', function (data) {
-                    if (data) console.log(data.user.name, data.text.replace(/(\r\n|\n|\r)/gm,""));
+                    //if (data) console.log(data.user.name, data.text.replace(/(\r\n|\n|\r)/gm,""));
                     var array = [];
                     if (data.geo) {
                         var coords = that.normalizeCoordinates(
@@ -56,33 +58,42 @@ WorldMap.prototype.start = function (coords) {
                         });
                         if (0 <= array[0].y && array[0].y < that.height && 0 <= array[0].x && array[0].x < that.width) {
                             var led = pixelScreen.image[array[0].y][array[0].x];
-
-                            led[0] = Math.min(led[0] + 200, 255);
-                            led[1] = Math.min(led[1] + 200, 255);
-                            led[2] = Math.min(led[2] + 200, 255);
+                            if (slowMode === true) {
+                                led[0] = Math.min(led[0] + 1, 255);
+                                led[1] = Math.min(led[1] + 1, 255);
+                                led[2] = Math.min(led[2] + 1, 255);
+                            } else {
+                                led[0] = Math.min(led[0] + 200, 255);
+                                led[1] = Math.min(led[1] + 200, 255);
+                                led[2] = Math.min(led[2] + 200, 255);
+                            }
                             pixelScreen.forceUpdate();
                         } else {
                             console.log('Out of Bounds!', array,  data.geo);
                         }
                     }
+                    // TweetCallback
+                    if (cb) cb(data);
                 });
 
             });
 
-    this.reduceInterval = setInterval(function () {
-        var array = [];
-        for (var i = 0; i < that.height; i++) {
-            array.push([]);
-            for (var j = 0; j < that.width; j++) {
-                array[i].push([
-                    that.reduceUntilMinOrZero(pixelScreen.image[i][j][0],3,15),
-                    that.reduceUntilMinOrZero(pixelScreen.image[i][j][1],3,15),
-                    that.reduceUntilMinOrZero(pixelScreen.image[i][j][2],15,15)
-                ]);
+    if (slowMode !== true) {
+        this.reduceInterval = setInterval(function () {
+            var array = [];
+            for (var i = 0; i < that.height; i++) {
+                array.push([]);
+                for (var j = 0; j < that.width; j++) {
+                    array[i].push([
+                        that.reduceUntilMinOrZero(pixelScreen.image[i][j][0],3,15),
+                        that.reduceUntilMinOrZero(pixelScreen.image[i][j][1],3,15),
+                        that.reduceUntilMinOrZero(pixelScreen.image[i][j][2],15,15)
+                    ]);
+                }
             }
-        }
-        pixelScreen.update(array);
-    }, 33);
+            pixelScreen.update(array);
+        }, 33);
+    }
 };
 
 WorldMap.prototype.stop = function () {
