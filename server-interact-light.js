@@ -13,7 +13,8 @@ var images = new Images(pixelScreen, {
     'tweet_bw':  './media/36x24_tweet_bw.png',
     'tweet_wb':  './media/36x24_tweet_wb.png'
 });
-var sound = new Sound();
+var sound = new Sound({ 'midiPort': config.midi.ports[0] });
+var sound2 = new Sound({ 'midiPort': config.midi.ports[1] });
 
 var twit = new twitter({
         consumer_key: config.twitter.consumer_key,
@@ -41,6 +42,9 @@ process.stdin.on('data', function (chunk) { // called on each line of input
 
 
 function streamCallback (data) {
+
+    if (data.user && data.user.name) server.io.sockets.emit('tweet', data.user.name + ' : ' + data.text);
+    console.log(data);
     var cmd = data.text.toLowerCase()
                        // .replace('@interactlight','')
                        .split(' ')
@@ -78,6 +82,7 @@ function streamCallback (data) {
     // Stop
     if (has('stop')) {
         console.log('cmd: stop');
+        server.io.sockets.emit('cmd', 'stop');
         resetState();
 
     // Black
@@ -94,10 +99,37 @@ function streamCallback (data) {
         resetState();
         images.showImageSafe('tweet_wb');
 
-    // Color
-    } else if (has('color') || has('colour')) {
-        console.log('cmd: color');
+    // // Color
+    // } else if (has('color') || has('colour')) {
+    //     console.log('cmd: color');
 
+    // // Image
+    // } else if (has('image') || has('http://t.co/')) {
+    //     console.log('cmd: image');
+
+    // Orchestra
+    } else if (has('orchestra')) {
+        console.log('cmd: ', 'orchestra');
+        server.io.sockets.emit('cmd', 'orchestra');
+
+        resetState();
+        var coords = getCoords();
+        images.showImageSafe('black', function (err) {
+            worldMap.start(coords, false, function tweetCallback (data) {
+
+
+                var offset = 0;
+                if (coords == coordinates['world']) offset = Math.random()*500;
+
+                // Send MIDI from time zone
+                var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
+                  , note = sound2.midiTable[sound.key[timezoneKey % sound2.key.length]][~~(timezoneKey / sound2.key.length)];
+                setTimeout(function () {
+                    sound2.sendMIDI(36+note)
+                }, offset);
+
+            });
+        });
     // Map
     } else if (has('world') || has('map')) {
         var word = 'map';
@@ -110,12 +142,15 @@ function streamCallback (data) {
         images.showImageSafe('black', function (err) {
             worldMap.start(coords, false, function tweetCallback (data) {
 
+                var offset = 0;
+                if (coords == coordinates['world']) offset = Math.random()*500;
+
                 // Send MIDI from time zone
                 var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
                   , note = sound.midiTable[sound.key[timezoneKey % sound.key.length]][~~(timezoneKey / sound.key.length)];
                 setTimeout(function () {
                     sound.sendMIDI(40+note)
-                }, Math.random()*1000);
+                },offset);
 
             });
         });

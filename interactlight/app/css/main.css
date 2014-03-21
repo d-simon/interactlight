@@ -1,0 +1,63 @@
+@font-face { font-family: GothamBlack; src: url('../font/Gotham-Black.otf'); } 
+
+body {
+
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 0 0;
+
+    background: #000;
+    font-family: GothamBlack, sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    color: white;
+    overflow:hidden;
+}
+
+#mainContainer {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border:solid #000 20px;
+    overflow: hidden;
+    margin:0 auto;
+}
+
+
+ul.tweets {
+    width: 60%;
+    padding: 0;
+    position:absolute;
+    z-index:1;
+    top:320px;
+    left:42%;
+    margin: 0 auto;
+    list-style: none;
+    line-height:1;
+    font-size:30px;
+}
+ul.tweets li {
+    margin-bottom:10px;
+}
+ul.commands {
+    width: 40%;
+    padding: 0;
+    z-index:1;
+    position:absolute;
+    top:320px;
+    left:20px;
+    margin: 0 auto;
+    list-style: none;
+    font-size:120px;
+    line-height:1;
+}
+ul.commands li {
+    margin-bottom:20px;
+}
+ul.commands li:first-child {
+    font-size:130px;
+}
+
+iframe { width:100%; height:100%; }

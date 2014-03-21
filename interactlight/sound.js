@@ -2,12 +2,13 @@ var config = require('../config.js')
   , midi = require('midi');
 
 
-function Sound () {
+function Sound (opts) {
+  this.midiPort = (opts) ? opts.midiPort || 0 : 0;
   this.midiTable = this.generateMidiTable();
   this.key = [0,2,4,5,7,9,11]; // C-Dur
   this.output = new midi.output();
-  this.output.openPort(config.midi.port);
-  console.log(this.output.getPortCount(), this.output.getPortName(config.midi.port));
+  this.output.openPort(this.midiPort);
+  console.log('Sound initiated with Midi: ' + this.output.getPortCount(), this.output.getPortName(this.midiPort));
 }
 
 Sound.prototype.sendMIDI = function (note, offDelay) {

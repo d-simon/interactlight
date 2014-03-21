@@ -20,7 +20,7 @@ io.set('log level', 1);
 app.configure(function() {
     app.use(connect.json());
     app.use(express.logger('dev'));
-    app.use(express.static(path.join(__dirname, '../app')));
+    app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 

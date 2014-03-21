@@ -1,0 +1,16 @@
+{
+  "name": "angular",
+  "version": "1.2.15-build.2391+sha.53ec5e1",
+  "main": "./angular.js",
+  "dependencies": {},
+  "homepage": "https://github.com/angular/bower-angular",
+  "_release": "1.2.15-build.2391+sha.53ec5e1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.15-build.2391+sha.53ec5e1",
+    "commit": "e9b19fbab2935978b201f23f837d575d1120cba4"
+  },
+  "_source": "git://github.com/angular/bower-angular.git",
+  "_target": "~1.2.6",
+  "_originalSource": "angular"
+}
