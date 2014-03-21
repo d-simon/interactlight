@@ -13,9 +13,9 @@ for (var i = 1; i < 902; i++) {
 
 setInterval(function () {
     var filename = files[count];
-    console.log(filename);
+    // console.log(filename);
     i2p(filename, { pixelsCallback: convertI2PtoPixelScreen }, function (err, pixels) {
-        console.log(pixels);
+        // console.log(pixels);
         pixelScreen.update(pixels);
     });
     count++;
@@ -30,19 +30,19 @@ function padString (str, width, paddingStr) {
 }
 
 function convertI2PtoPixelScreen (input) {
-    console.log(input);
+    //console.log(input);
     var output = [];
     for (var i = 0; i < input.length; i++) {
         output.push([])
         for (var j = 0; j < input[i].length; j++) {
             output[i].push([
-                ~~(input[i][j].red/15),
-                ~~(input[i][j].green/15),
-                ~~(input[i][j].blue/15)
+                input[i][j].red,
+                input[i][j].green,
+                input[i][j].blue
             ]);
         }
     }
-    console.log(output);
+    //console.log(output);
     return output;
 }
 

@@ -11,9 +11,9 @@ for (var i = 1; i < 1128; i++) {
 
 var interval = setInterval(function () {
     var filename = files[count];
-    console.log(filename);
+    // console.log(filename);
     i2p(filename, { pixelsCallback: convertI2PtoPixelScreen }, function (err, pixels) {
-        console.log(pixels);
+        // console.log(pixels);
         pixelScreen.update(pixels);
     });
     count++;

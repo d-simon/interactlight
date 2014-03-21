@@ -13,9 +13,7 @@ for (var i = 1; i < 1128; i++) {
 
 setInterval(function () {
     var filename = files[count];
-    console.log(filename);
     i2p(filename, { pixelsCallback: convertI2PtoPixelScreen }, function (err, pixels) {
-        console.log(pixels);
         pixelScreen.update(pixels);
     });
     count++;
@@ -30,7 +28,6 @@ function padString (str, width, paddingStr) {
 }
 
 function convertI2PtoPixelScreen (input) {
-    console.log(input);
     var output = [];
     for (var i = 0; i < input.length; i++) {
         output.push([])
@@ -42,7 +39,6 @@ function convertI2PtoPixelScreen (input) {
             ]);
         }
     }
-    console.log(output);
     return output;
 }
 
