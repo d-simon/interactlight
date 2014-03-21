@@ -1,4 +1,5 @@
 var Stream = require('stream')
+  , TerminalScreen = require('terminal-pixelscreen')
   , _ = require('lodash')
   , extend = require('extend');
 
@@ -9,7 +10,7 @@ function SubScreen (name, options, callback) {
         width: 1,
         height: 1,
         channels: 3,
-        dmx: false,
+        dmx: false
     },options);
     this.name = name;
     this.x = opts.x;
@@ -41,13 +42,16 @@ function PixelScreen (options) {
     var opts = extend({
         width: 1,
         height: 1,
-        channels: 3
+        channels: 3,
+        displayScreen: false
     }, options);
     this.width = opts.width;
     this.height = opts.height;
     this.channels = opts.channels;
     this.image = createImageArray(this.width, this.height, this.channels);
     this.screens = [];
+    this.displayScreen = opts.displayScreen;
+    this.terminalScreen = new TerminalScreen(this.width,this.height,0);
 }
 
 PixelScreen.prototype.registerScreen = function (name, options, callback) {
@@ -69,6 +73,10 @@ PixelScreen.prototype.forceUpdate = function () {
         if(screen.dmx === true) pixelImage = this.arrayToDMX(pixelImage);
         screen.callback(null, pixelImage);
     }
+    if (this.displayScreen === true) {
+        this.terminalScreen.update(this.image);
+        this.terminalScreen.paint();
+    }
     return this;
 };
 
@@ -85,6 +93,10 @@ PixelScreen.prototype.update = function (input) {
           , pixelImage = this.getImage(screen.name);
         if(screen.dmx === true) pixelImage = this.arrayToDMX(pixelImage);
         screen.callback(null, pixelImage);
+    }
+    if (this.displayScreen === true) {
+        this.terminalScreen.update(this.image);
+        this.terminalScreen.paint();
     }
     return this;
 };

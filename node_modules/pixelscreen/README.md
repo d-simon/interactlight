@@ -2,7 +2,10 @@ pixelscreen
 ===========
 
 Create virtual screens and populate them with subscreens.
-Supports Multi-Channel Pixels (RGB LED) Conversion to DMX
+
+Supports Multi-Channel Pixels (RGB LED) Conversion to DMX.
+
+Also allows to output the main screen to console.
 
 ## Install
 
