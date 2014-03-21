@@ -36,12 +36,12 @@ angular.module('tweetDisplay', [
         $scope.$on('socket:tweet', function(ev, data) {
             //$scope.featured = $scope.getFeaturedWord(data.data.text);$
             //document.getElementById('click').play();
-            var ranges = [
-              '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
-              '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
-              '\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
-            ];
-            data.data.text = data.data.text.replace(new RegExp(ranges.join('|'), 'g'), '');
+            // var ranges = [
+            //   '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+            //   '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+            //   '\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
+            // ];
+            // data.data.text = data.data.text.replace(new RegExp(ranges.join('|'), 'g'), '');
 
             if (data.data.lang == 'en' || data.data.lang == 'ru') {
                 $scope.count++;

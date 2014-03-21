@@ -11,8 +11,15 @@ var images = new Images(pixelScreen, {
     'black':     './media/36x24_black.png',
     'white':     './media/36x24_white.png',
     'tweet_bw':  './media/36x24_tweet_bw.png',
-    'tweet_wb':  './media/36x24_tweet_wb.png'
+    'tweet_wb':  './media/36x24_tweet_wb.png',
+    'arabia':    './media/cities_36x24_arabia.png',
+    'zuerich':    './media/cities_36x24_zurich.png',
+    'europe':    './media/cities_36x24_europe.png',
+    'london':    './media/cities_36x24_london.png',
+    'newyork':    './media/cities_36x24_newyork.png',
+    'world':    './media/cities_36x24_world.png'
 });
+
 var sound = new Sound({ 'midiPort': config.midi.ports[0] });
 var sound2 = new Sound({ 'midiPort': config.midi.ports[1] });
 
@@ -59,23 +66,23 @@ function streamCallback (data) {
     function has (keyword) {
         return hasKeyword(cmd,keyword);
     }
-    function getCoords () {
-        var returnCoords;
-        if (has('ny') || (has('new') && has('york')) || has('newyork')) { returnCoords = coordinates['newyork']; }
-        else if (has('london')) { returnCoords = coordinates['london']; }
-        else if (has('arabia') || has('saudi')) { returnCoords = coordinates['arabia']; }
-        else if (has('europe') || has('eu')) { returnCoords = coordinates['europe']; }
-        else if (has('switzerland') || has('swiss')) { returnCoords = coordinates['switzerland']; }
-        else if (has('ukraine')) { returnCoords = coordinates['ukraine']; }
-        else if (has('school')) { returnCoords = coordinates['school']; }
-        else if (has('zuerich') || has('zueri') || has('z%FCri')) { returnCoords = coordinates['zuerich']; }
-        else { returnCoords = coordinates['world']; }
-        return returnCoords;
+    function getCoordsStr () {
+        var returnStr;
+        if (has('ny') || (has('new') && has('york')) || has('newyork')) { returnStr = 'newyork'; }
+        else if (has('london')) { returnStr = 'london'; }
+        else if (has('arabia') || has('saudi')) { returnStr = 'arabia'; }
+        else if (has('europe') || has('eu')) { returnStr = 'europe'; }
+        else if (has('switzerland') || has('swiss')) { returnStr = 'switzerland'; }
+        else if (has('ukraine')) { returnStr = 'ukraine'; }
+        else if (has('school')) { returnStr = 'school'; }
+        else if (has('zuerich') || has('zueri') || has('z%FCri')) { returnStr = 'zuerich'; }
+        else { returnStr = 'world'; }
+        return returnStr;
     }
 
     function resetState () {
         worldMap.stop();
-        images.showImageSafe('tweet_black');
+        images.showImageSafe('black');
     }
 
 
@@ -113,23 +120,29 @@ function streamCallback (data) {
         server.io.sockets.emit('cmd', 'orchestra');
 
         resetState();
-        var coords = getCoords();
-        images.showImageSafe('black', function (err) {
-            worldMap.start(coords, false, function tweetCallback (data) {
+        var coordsStr = getCoordsStr()
+          , coords = coordinates[coordsStr];
+          console.log(coordsStr, !!images.files[coordsStr]);
+        images.showImageSafe((images.files[coordsStr]) ? coordsStr : 'tweet_bw', function (err) {
+            setTimeout(function () {
+                images.showImageSafe('black', function (err) {
+                    worldMap.start(coords, false, function tweetCallback (data) {
 
+                        var offset = 0;
+                        if (coordsStr == 'world') offset = Math.random()*500;
 
-                var offset = 0;
-                if (coords == coordinates['world']) offset = Math.random()*500;
+                        // Send MIDI from time zone
+                        var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
+                          , note = sound2.midiTable[sound.key[timezoneKey % sound2.key.length]][~~(timezoneKey / sound2.key.length)];
+                        setTimeout(function () {
+                            sound2.sendMIDI(36+note)
+                        }, offset);
 
-                // Send MIDI from time zone
-                var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
-                  , note = sound2.midiTable[sound.key[timezoneKey % sound2.key.length]][~~(timezoneKey / sound2.key.length)];
-                setTimeout(function () {
-                    sound2.sendMIDI(36+note)
-                }, offset);
-
-            });
+                    });
+                });
+            }, 4000);
         });
+
     // Map
     } else if (has('world') || has('map')) {
         var word = 'map';
@@ -138,21 +151,27 @@ function streamCallback (data) {
         server.io.sockets.emit('cmd', word);
 
         resetState();
-        var coords = getCoords();
-        images.showImageSafe('black', function (err) {
-            worldMap.start(coords, false, function tweetCallback (data) {
+        var coordsStr = getCoordsStr()
+          , coords = coordinates[coordsStr]
+          , image = (images.files[coordsStr]) ? coordsStr : 'tweet_bw';
+        images.showImageSafe(image, function (err) {
+            setTimeout(function () {
+                images.showImageSafe('black', function (err) {
+                    worldMap.start(coords, false, function tweetCallback (data) {
 
-                var offset = 0;
-                if (coords == coordinates['world']) offset = Math.random()*500;
+                        var offset = 0;
+                        if (coordsStr == 'world') offset = Math.random()*500;
 
-                // Send MIDI from time zone
-                var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
-                  , note = sound.midiTable[sound.key[timezoneKey % sound.key.length]][~~(timezoneKey / sound.key.length)];
-                setTimeout(function () {
-                    sound.sendMIDI(40+note)
-                },offset);
+                        // Send MIDI from time zone
+                        var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
+                          , note = sound.midiTable[sound.key[timezoneKey % sound.key.length]][~~(timezoneKey / sound.key.length)];
+                        setTimeout(function () {
+                            sound.sendMIDI(40+note)
+                        },offset);
 
-            });
+                    });
+                });
+            }, 4000);
         });
     }
 }
