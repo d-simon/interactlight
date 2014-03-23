@@ -14,7 +14,7 @@ This is the code repository the installation produced and the experiments conduc
 - `lib/` independet reuseable components (i.e. snake logic)
 - `media/` media (i.e. pixelimages)
 - `loops/` examples of "video streams" / image sequences
-- `old/` this is where all experimental samples are located (including the DMX samples). The code here is very unorganized and not DRY.
+- `old/` this is where all experimental samples are located. The code here is very unorganized and not DRY.
 
 ###To Do
 
