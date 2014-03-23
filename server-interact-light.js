@@ -20,8 +20,11 @@ var images = new Images(pixelScreen, {
     'world':    './media/cities_36x24_world.png'
 });
 
-var sound = new Sound({ 'midiPort': config.midi.ports[0] });
-var sound2 = new Sound({ 'midiPort': config.midi.ports[1] });
+var sound, sound2;
+if (config.midi.enable === true) {
+    sound = new Sound({ 'midiPort': config.midi.ports[0] });
+    sound2 = new Sound({ 'midiPort': config.midi.ports[1] });
+}
 
 var twit = new twitter({
         consumer_key: config.twitter.consumer_key,
@@ -84,7 +87,7 @@ function streamCallback (data) {
         return hasKeyword(cmd, keyword);
     }
     // Tweet Sound On Input
-    sound.sendMIDI(45);
+    if (config.midi.enable === true) sound.sendMIDI(45);
 
 
     // Stop
@@ -134,19 +137,20 @@ function streamCallback (data) {
 
                         var offset = (coordsStr === 'world') ? Math.random()*500 : 0;
 
-                        // Send MIDI from time zone
-                        var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
-                          , note = sound.midiTable[sound.key[timezoneKey % sound.key.length]][~~(timezoneKey / sound.key.length)];
-                        setTimeout(function () {
-                            if (has('orchestra')) {
-                                sound2.sendMIDI(40+note);
-                            } else {
-                                sound.sendMIDI(40+note);
-                            }
-                        },offset);
+                        if (config.midi.enable === true) {
+                            // Send MIDI from time zone
+                            var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
+                              , note = sound.midiTable[sound.key[timezoneKey % sound.key.length]][~~(timezoneKey / sound.key.length)];
+                            setTimeout(function () {
+                                if (has('orchestra')) {
+                                    sound2.sendMIDI(40+note);
+                                } else {
+                                    sound.sendMIDI(40+note);
+                                }
+                            },offset);
+                        }
 
                         server.io.sockets.emit('tweet-stream', data);
-
                     });
                 });
             }, 4000);
