@@ -2,7 +2,7 @@ InteractLight
 =============
 
 
-This is the code repository the installation produced and the experiments conducted during the course "Farbe, Licht, Interaktion" at ZHdK during the time of 10.03.14 - 19.03.14
+This is the code repository the installation produced and the experiments conducted during the course "Farbe, Licht, Interaktion" at [ZHdK](http://www.zhdk.ch) during the time of 10.03.14-19.03.14
 
 [![Code Climate](https://codeclimate.com/github/d-simon/dmx-experiments.png)](https://codeclimate.com/github/d-simon/dmx-experiments)
 
@@ -16,14 +16,7 @@ This is the code repository the installation produced and the experiments conduc
 - `loops/` examples of "video streams" / image sequences
 - `old/` this is where all experimental samples are located (including the DMX samples). The code here is very unorganized and not DRY.
 
-
-###Dependencies
-
-- [Node.js](http://www.nodejs.org/)
-- [bower](http://bower.io/)
-- If you intend to connect through DMX directly from your machine (instead of sending it through Artnet)then you'll need the **FTDI Drivers** + **libftdi** (Install the later one with Homebrew or Macports)
-
-###TODO
+###To Do
 
 ~~The code is currently (17.03.14) in *very unorganized* state. This is *work in progress.*~~ The plan is to split up functionality into separate libraries and provide a clean set of repositories/plugins, plus a collective repository for our usage examples.
 
@@ -34,3 +27,13 @@ This is the code repository the installation produced and the experiments conduc
  - ~~Make everything D.R.Y~~
  - ~~Clean up the so far created examples~~ Create beginner friendly examples
  - Web Interface(s)
+
+###Dependencies
+
+- [Node.js](http://www.nodejs.org/)
+- If you intend to connect through DMX directly from your machine (instead of sending it through Artnet)then you'll need the **FTDI Drivers** + **libftdi** (Install the later one with Homebrew or Macports)
+
+###Installation
+
+Run `npm install` to load all package dependencies
+
