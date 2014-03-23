@@ -1,4 +1,4 @@
-var pixelScreen = require('./screen-36x24.js')
+var pixelScreen = require('./screen-36x24.js');
 
 var screenWidth = pixelScreen.width / 2;
 var screenHeight = pixelScreen.height / 2;
@@ -15,28 +15,28 @@ process.stdin.on('keypress', function (ch, key) {
 
     switch(key.name) {
         case 'up':
-            snake.cmd('up')
+            snake.cmd('up');
             break;
         case 'down':
-            snake.cmd('down')
+            snake.cmd('down');
             break;
         case 'left':
-            snake.cmd('left')
+            snake.cmd('left');
             break;
         case 'right':
-            snake.cmd('right')
+            snake.cmd('right');
             break;
         case 'space':
-            snake.cmd('restart')
+            snake.cmd('restart');
             break;
         case 'p':
-            snake.cmd('pause')
+            snake.cmd('pause');
             break;
         default:
             break;
     }
 
-    if (key && key.ctrl && key.name == 'c') {
+    if (key && key.ctrl && key.name === 'c') {
         process.exit(0);
     }
 });
@@ -52,8 +52,8 @@ snake.stream.on('update', function (state) {
             array[i].push([]);
             for (var k = 0; k < pixelScreen.channels; k++) {
                 array[i][j].push(0);
-            };
-        };
+            }
+        }
     }
 
     // Draw Body

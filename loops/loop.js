@@ -1,5 +1,7 @@
 var pixelScreen = require('../screen-36x24.js');
 
+var util = require('../interactlight/util.js');
+
 var i2p = require('image2pixels');
 
 var fileConfig = {
@@ -9,7 +11,7 @@ var fileConfig = {
     '4': { prefix: './loop4/loop4', suffix: '.png', counterLength: 6, start: 1, end: 601, fps: 24 },
     '5': { prefix: './loop5/loop5', suffix: '.png', counterLength: 6, start: 1, end: 1199, fps: 24 },
     '6': { prefix: './loop6/loop6', suffix: '.png', counterLength: 6, start: 1, end: 468, fps: 24 },
-    '7': { prefix: './loop7/<loop75></loop75>', suffix: '.png', counterLength: 6, start: 1, end: 1200, fps: 24 },
+    '7': { prefix: './loop7/loop75', suffix: '.png', counterLength: 6, start: 1, end: 1200, fps: 24 },
     '8': { prefix: './loop8/loop8', suffix: '.png', counterLength: 6, start: 1, end: 300, fps: 24 },
     '9': { prefix: './loop9/loop9', suffix: '.png', counterLength: 6, start: 1, end: 601, fps: 24 },
     '10': { prefix: './loop10/loop10', suffix: '.png', counterLength: 6, start: 1, end: 898, fps: 24 }
@@ -24,7 +26,7 @@ for (var i = current.start; i <= current.end; i++) {
 
 setInterval(function () {
     var filename = files[loopCount];
-    i2p(filename, { pixelsCallback: convertI2PtoPixelScreen }, function (err, pixels) {
+    i2p(filename, { pixelsCallback: util.convertI2PtoPixelScreen }, function (err, pixels) {
         pixelScreen.update(pixels);
     });
     loopCount++;
@@ -36,21 +38,6 @@ function padString (str, width, paddingStr) {
     str = str + '';
     while (str.length < width) { str = paddingStr + str; }
     return str;
-}
-
-function convertI2PtoPixelScreen (input) {
-    var output = [];
-    for (var i = 0; i < input.length; i++) {
-        output.push([])
-        for (var j = 0; j < input[i].length; j++) {
-            output[i].push([
-                input[i][j].red,
-                input[i][j].green,
-                input[i][j].blue
-            ]);
-        }
-    }
-    return output;
 }
 
 module.exports = pixelScreen;

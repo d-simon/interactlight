@@ -1,4 +1,5 @@
-var i2p = require('image2pixels');
+var i2p = require('image2pixels')
+  , util = require('./util.js');
 
 function Images (pixelScreen, files) {
     this.pixelScreen = pixelScreen;
@@ -17,35 +18,20 @@ Images.prototype.showImage = function (str, callback) {
     var fileStr = '';
     var that = this;
 
-    for (file in this.files) {
+    for (var file in this.files) {
         if (file === str) {
             fileStr = this.files[file];
             break;
         }
     }
     if (fileStr.length) {
-        i2p(fileStr, { pixelsCallback: this.convertI2PtoPixelScreen }, function (err, pixels) {
+        i2p(fileStr, { pixelsCallback: util.convertI2PtoPixelScreen }, function (err, pixels) {
             that.pixelScreen.update(pixels);
             if (typeof callback === 'function') callback(null, pixels);
         });
     } else {
         if (typeof callback === 'function') callback(new Error('Not Found!'), null);
     }
-};
-
-Images.prototype.convertI2PtoPixelScreen = function (input) {
-    var output = [];
-    for (var i = 0; i < input.length; i++) {
-        output.push([])
-        for (var j = 0; j < input[i].length; j++) {
-            output[i].push([
-                input[i][j].red,
-                input[i][j].green,
-                input[i][j].blue
-            ]);
-        }
-    }
-    return output;
 };
 
 module.exports = Images;

@@ -1,14 +1,12 @@
-var config = require('../config.js');
-
 var http     = require('http')
   , connect  = require('connect')
   , express  = require('express')
   , socketio = require('socket.io')
   , path = require('path');
 
-var app    = express()
-var server = http.createServer(app)
-var io     = socketio.listen(server)
+var app    = express();
+var server = http.createServer(app);
+var io     = socketio.listen(server);
 
 var port = process.env.PORT|| 9001;
 var host = process.env.HOST || '::';

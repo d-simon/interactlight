@@ -1,14 +1,12 @@
-var config = require('../config.js')
-  , midi = require('midi');
-
+var midi = require('midi');
 
 function Sound (opts) {
-  this.midiPort = (opts) ? opts.midiPort || 0 : 0;
-  this.midiTable = this.generateMidiTable();
-  this.key = [0,2,4,5,7,9,11]; // C-Dur
-  this.output = new midi.output();
-  this.output.openPort(this.midiPort);
-  console.log('Sound initiated with Midi: ' + this.output.getPortCount(), this.output.getPortName(this.midiPort));
+    this.midiPort = (opts) ? opts.midiPort || 0 : 0;
+    this.midiTable = this.generateMidiTable();
+    this.key = [0,2,4,5,7,9,11]; // C-Dur
+    this.output = new midi.output();
+    this.output.openPort(this.midiPort);
+    console.log('Sound initiated with Midi: ' + this.output.getPortCount(), this.output.getPortName(this.midiPort));
 }
 
 Sound.prototype.sendMIDI = function (note, offDelay) {
@@ -26,7 +24,7 @@ Sound.prototype.generateMidiTable = function () {
         var array = [];
         for (var j = 0; j < 11; j++) {
             array.push(i + j*12);
-        };
+        }
         returnA.push(array);
     }
     return returnA;
