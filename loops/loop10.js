@@ -2,13 +2,12 @@ var config = require('../config.js')
   , Artnet = require('artnet-node')
   , pixelScreen = require('../screen-36x24.js');
 
-
 var i2p = require('image2pixels');
 
 var files = [],
     count = 0;
-for (var i = 1; i < 1199; i++) {
-    files.push('./loop5/loop5'+padString(i,6)+'.png');
+for (var i = 1; i < 898; i++) {
+    files.push('./loop10/loop10'+padString(i,6)+'.png');
 }
 
 setInterval(function () {
@@ -19,7 +18,7 @@ setInterval(function () {
         pixelScreen.update(pixels);
     });
     count++;
-    if (count > 1197) count = 0;
+    if (count > 896) count = 0;
 },33);
 
 function padString (str, width, paddingStr) {

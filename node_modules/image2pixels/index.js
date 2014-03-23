@@ -16,7 +16,7 @@ module.exports = function (filename, options, callback) {
     opts = extend({ GD: false, pixelsCallback: false }, opts);
 
     mopen(filename, function (err, inputimg){
-        if (err) callback(err, null);
+        if (err) return callback(err, null);
         var pixels = i2p(inputimg);
 
         // Pixels Callback

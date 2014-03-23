@@ -58,10 +58,10 @@ snake.stream.on('update', function (state) {
 
     // Draw Body
     for (var i = 0; i < state.body.length; i++) {
-        array[state.body[i].y*2][state.body[i].x*2] = [10,10,10];
-        array[state.body[i].y*2][state.body[i].x*2+1] = [10,10,10];
-        array[state.body[i].y*2+1][state.body[i].x*2] = [10,10,10];
-        array[state.body[i].y*2+1][state.body[i].x*2+1] = [10,10,10];
+        array[state.body[i].y*2][state.body[i].x*2] = [30,30,30];
+        array[state.body[i].y*2][state.body[i].x*2+1] = [30,30,30];
+        array[state.body[i].y*2+1][state.body[i].x*2] = [30,30,30];
+        array[state.body[i].y*2+1][state.body[i].x*2+1] = [30,30,30];
     }
 
     // Draw Food

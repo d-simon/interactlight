@@ -6,9 +6,9 @@ var http     = require('http')
   , socketio = require('socket.io')
   , path = require('path');
 
-var app    = express()
-var server = http.createServer(app)
-var io     = socketio.listen(server)
+var app    = express();
+var server = http.createServer(app);
+var io     = socketio.listen(server);
 
 var listen_port = process.env.PORT|| 9001;
 var listen_host = process.env.HOST || '::';
@@ -23,10 +23,6 @@ app.configure(function() {
     app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
-
-io.sockets.on('connection', function(socket) {
-
-})
 
 var twitter = require('ntwitter');
 var twit = new twitter({

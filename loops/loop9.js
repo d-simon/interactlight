@@ -2,13 +2,12 @@ var config = require('../config.js')
   , Artnet = require('artnet-node')
   , pixelScreen = require('../screen-36x24.js');
 
-
 var i2p = require('image2pixels');
 
 var files = [],
     count = 0;
-for (var i = 1; i < 468; i++) {
-    files.push('./loop6/loop6'+padString(i,6)+'.png');
+for (var i = 1; i < 601; i++) {
+    files.push('./loop9/loop9'+padString(i,6)+'.png');
 }
 
 setInterval(function () {
@@ -19,8 +18,9 @@ setInterval(function () {
         pixelScreen.update(pixels);
     });
     count++;
-    if (count > 468) count = 0;
+    if (count > 599) count = 0;
 },33);
+
 
 function padString (str, width, paddingStr) {
     paddingStr = paddingStr || '0';
@@ -30,7 +30,7 @@ function padString (str, width, paddingStr) {
 }
 
 function convertI2PtoPixelScreen (input) {
-    console.log(input);
+    //console.log(input);
     var output = [];
     for (var i = 0; i < input.length; i++) {
         output.push([])
@@ -42,7 +42,7 @@ function convertI2PtoPixelScreen (input) {
             ]);
         }
     }
-    console.log(output);
+    //console.log(output);
     return output;
 }
 

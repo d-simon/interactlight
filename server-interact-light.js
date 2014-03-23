@@ -30,13 +30,13 @@ var twit = new twitter({
         access_token_secret: config.twitter.access_token_secret
     });
 
-var worldMap = new WorldMap()
+var worldMap = new WorldMap();
 
 // Start Image
 images.showImage('tweet_bw');
 
 // Input Stream
-twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'none'}, function(stream) {
+twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'none'}, function (stream) {
     stream.on('data', streamCallback);
 });
 
@@ -47,43 +47,46 @@ process.stdin.on('data', function (chunk) { // called on each line of input
     streamCallback({text: line});
 });
 
+function hasKeyword (str, keyword) {
+    return str.indexOf(keyword) > -1;
+}
+function getCoordsStr (str) {
+    var places = {
+        'newyork':     ['ny', 'newyork'],
+        'london':      ['london'],
+        'arabia':      ['arabia', 'saudi'],
+        'switzerland': ['swizerland', 'swiss'],
+        'ukraine':     ['ukraine'],
+        'school':      ['school'],
+        'europe':      ['europe', 'eu']
+    };
+    for (var place in places) {
+        for (var i = 0; i < places[place].length; i++) {
+            if  (hasKeyword(str, places[place][i])) return place;
+        }
+    }
+    return 'world';
+}
+
+function resetState () {
+    worldMap.stop();
+    images.showImageSafe('black');
+}
 
 function streamCallback (data) {
 
+    function has (keyword) {
+        return hasKeyword(cmd,keyword);
+    }
     if (data.user && data.user.name) server.io.sockets.emit('tweet', data.user.name + ' : ' + data.text);
-    console.log(data);
+
     var cmd = data.text.toLowerCase()
                        // .replace('@interactlight','')
                        .split(' ')
                        .join('');
 
-    // Tweet Sound
+    // Tweet Sound On Input
     sound.sendMIDI(45);
-
-    function hasKeyword (str, keyword) {
-        return str.indexOf(keyword) > -1;
-    }
-    function has (keyword) {
-        return hasKeyword(cmd,keyword);
-    }
-    function getCoordsStr () {
-        var returnStr;
-        if (has('ny') || (has('new') && has('york')) || has('newyork')) { returnStr = 'newyork'; }
-        else if (has('london')) { returnStr = 'london'; }
-        else if (has('arabia') || has('saudi')) { returnStr = 'arabia'; }
-        else if (has('europe') || has('eu')) { returnStr = 'europe'; }
-        else if (has('switzerland') || has('swiss')) { returnStr = 'switzerland'; }
-        else if (has('ukraine')) { returnStr = 'ukraine'; }
-        else if (has('school')) { returnStr = 'school'; }
-        else if (has('zuerich') || has('zueri') || has('z%FCri')) { returnStr = 'zuerich'; }
-        else { returnStr = 'world'; }
-        return returnStr;
-    }
-
-    function resetState () {
-        worldMap.stop();
-        images.showImageSafe('black');
-    }
 
 
     // Stop
@@ -114,59 +117,34 @@ function streamCallback (data) {
     // } else if (has('image') || has('http://t.co/')) {
     //     console.log('cmd: image');
 
-    // Orchestra
-    } else if (has('orchestra')) {
-        console.log('cmd: ', 'orchestra');
-        server.io.sockets.emit('cmd', 'orchestra');
-
-        resetState();
-        var coordsStr = getCoordsStr()
-          , coords = coordinates[coordsStr];
-          console.log(coordsStr, !!images.files[coordsStr]);
-        images.showImageSafe((images.files[coordsStr]) ? coordsStr : 'tweet_bw', function (err) {
-            setTimeout(function () {
-                images.showImageSafe('black', function (err) {
-                    worldMap.start(coords, false, function tweetCallback (data) {
-
-                        var offset = 0;
-                        if (coordsStr == 'world') offset = Math.random()*500;
-
-                        // Send MIDI from time zone
-                        var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
-                          , note = sound2.midiTable[sound.key[timezoneKey % sound2.key.length]][~~(timezoneKey / sound2.key.length)];
-                        setTimeout(function () {
-                            sound2.sendMIDI(36+note)
-                        }, offset);
-
-                    });
-                });
-            }, 4000);
-        });
-
     // Map
-    } else if (has('world') || has('map')) {
-        var word = 'map';
-        if (has('world')) word = 'world';
+    } else if (has('world') || has('map') || has('orchestra')) {
+        var word = (has('world')) ? 'world' : 'map';
         console.log('cmd: ', word);
         server.io.sockets.emit('cmd', word);
-
         resetState();
+
         var coordsStr = getCoordsStr()
           , coords = coordinates[coordsStr]
           , image = (images.files[coordsStr]) ? coordsStr : 'tweet_bw';
         images.showImageSafe(image, function (err) {
+            if (err) return console.log(err);
             setTimeout(function () {
                 images.showImageSafe('black', function (err) {
+                    if (err) return console.log(err);
                     worldMap.start(coords, false, function tweetCallback (data) {
 
-                        var offset = 0;
-                        if (coordsStr == 'world') offset = Math.random()*500;
+                        var offset = (coordsStr === 'world') ? Math.random()*500 : 0;
 
                         // Send MIDI from time zone
                         var timezoneKey = ~~(data.user.utc_offset / 3600 + 12) // 0-23
                           , note = sound.midiTable[sound.key[timezoneKey % sound.key.length]][~~(timezoneKey / sound.key.length)];
                         setTimeout(function () {
-                            sound.sendMIDI(40+note)
+                            if (has('orchestra')) {
+                                sound2.sendMIDI(40+note);
+                            } else {
+                                sound.sendMIDI(40+note);
+                            }
                         },offset);
 
                     });
