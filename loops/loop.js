@@ -1,6 +1,4 @@
-var config = require('../config.js')
-  , Artnet = require('artnet-node')
-  , pixelScreen = require('../screen-36x24.js');
+var pixelScreen = require('../screen-36x24.js');
 
 var i2p = require('image2pixels');
 
