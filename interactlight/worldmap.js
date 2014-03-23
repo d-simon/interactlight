@@ -56,7 +56,7 @@ WorldMap.prototype.start = function (coords, slow, cb) {
                         g: 10,
                         b: 255
                     });
-                    if (0 <= array[0].y && array[0].y < that.height && 0 <= array[0].x && array[0].x < that.width) {
+                    if (0 <= array[0].y && array[0].y < that.height && 0 <= array[0].x && array[0].x < that.width) {
                         var led = pixelScreen.image[array[0].y][array[0].x];
                         if (slowMode === true) {
                             led[0] = Math.min(led[0] + 1, 255);
