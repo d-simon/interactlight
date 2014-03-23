@@ -4,7 +4,7 @@ InteractLight
 
 This is the code repository the installation produced and the experiments conducted during the course "Farbe, Licht, Interaktion" at [ZHdK](http://www.zhdk.ch) during the time of 10.03.14-19.03.14
 
-[![Code Climate](https://codeclimate.com/github/d-simon/dmx-experiments.png)](https://codeclimate.com/github/d-simon/dmx-experiments)
+[![Code Climate](https://codeclimate.com/github/d-simon/interactlight.png)](https://codeclimate.com/github/d-simon/interactlight)
 
 ##Overview
 - `server-interact-light.js` is the main entry point for the installation.
