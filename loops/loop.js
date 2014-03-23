@@ -21,7 +21,7 @@ var current = (process.argv[2] && fileConfig[process.argv[2]]) ? fileConfig[proc
   , files = []
   , loopCount = 0;
 for (var i = current.start; i <= current.end; i++) {
-    files.push(current.prefix+padString(i,6)+current.suffix);
+    files.push(current.prefix + util.padString(i,6) + current.suffix);
 }
 
 setInterval(function () {
@@ -33,11 +33,5 @@ setInterval(function () {
     if (loopCount > current.end - current.start) loopCount = 0;
 },1000/current.fps);
 
-function padString (str, width, paddingStr) {
-    paddingStr = paddingStr || '0';
-    str = str + '';
-    while (str.length < width) { str = paddingStr + str; }
-    return str;
-}
 
 module.exports = pixelScreen;
