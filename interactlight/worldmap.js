@@ -148,7 +148,7 @@ WorldMap.prototype.reduceUntilZero = function (inputVal, step) {
     return (inputVal > n) ? inputVal - n : 0;
 };
 WorldMap.prototype.reduceUntilMinOrZero = function (inputVal, minimum, step) {
-    var min = minimums || 50;
+    var min = minimum || 50;
     var n = step || 1;
     if (inputVal === 0) return 0;
     return (inputVal > min) ? Math.max(inputVal - n,min) : min;

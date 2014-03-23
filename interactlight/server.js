@@ -18,8 +18,11 @@ io.set('log level', 1);
 app.configure(function() {
     app.use(connect.json());
     app.use(express.logger('dev'));
-    app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+
+    app.use("/click", express.static(path.join(__dirname, 'app-click')));
+    app.use("/", express.static(path.join(__dirname, 'app-command')));
 });
+
 
 module.exports = { 'io': io, 'app': app, 'server': server };

@@ -2,27 +2,24 @@
 <html ng-app="tweetDisplay">
 <head>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/bower_components/buzz/dist/buzz.js"></script>
-    <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/angular-socket-io/socket.js"></script>
+    <script src="bower_components/buzz/dist/buzz.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
     <script type="text/javascript" src="//use.typekit.net/zin0xwj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <script src="/js/main.js"></script>
-    <link href="/css/main.css" rel="stylesheet">
+    <script src="js/main.js"></script>
+    <link href="css/main.css" rel="stylesheet">
 </head>
 <body>
     <div id="mainContainer" ng-controller="MainCtrl">
         <div ng-if="featured" id="featured">
             <p>{{ featured }}</p>
         </div>
-        <!-- <ul class="tweets">
-            <li ng-repeat="tweet in tweets">{{ tweet.text }}</li>
-        </ul> -->
         <ul class="tweets">
-            <li ng-repeat="tweet in tweetsAll">{{ tweet.text }}</li>
+            <li ng-repeat="tweet in tweets">{{ tweet.text }}</li>
         </ul>
     </div>
-    <audio src="/click.wav" id="click"></audio>
+    <audio src="click.wav" id="click"></audio>
     <!-- <iframe id="backwindow"></iframe> -->
 </body>
 </html>

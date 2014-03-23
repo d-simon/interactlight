@@ -1,5 +1,5 @@
 module.exports = {
-    convertI2PtoPixelScreen = function (input) {
+    convertI2PtoPixelScreen: function (input) {
         var output = [];
         for (var i = 0; i < input.length; i++) {
             output.push([]);
@@ -13,7 +13,7 @@ module.exports = {
         }
         return output;
     },
-    padString = function (str, width, paddingStr) {
+    padString: function (str, width, paddingStr) {
         paddingStr = paddingStr || '0';
         str = str + '';
         while (str.length < width) { str = paddingStr + str; }

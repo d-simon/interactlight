@@ -62,7 +62,8 @@ function getCoordsStr (str) {
     };
     for (var place in places) {
         for (var i = 0; i < places[place].length; i++) {
-            if  (hasKeyword(str, places[place][i])) return place;
+            console.log(places[place][i]);
+            if (hasKeyword(str, places[place][i])) return place;
         }
     }
     return 'world';
@@ -75,16 +76,13 @@ function resetState () {
 
 function streamCallback (data) {
 
-    function has (keyword) {
-        return hasKeyword(cmd,keyword);
-    }
+
     if (data.user && data.user.name) server.io.sockets.emit('tweet', data.user.name + ' : ' + data.text);
 
-    var cmd = data.text.toLowerCase()
-                       // .replace('@interactlight','')
-                       .split(' ')
-                       .join('');
-
+    var cmd = (data.text) ? data.text.toLowerCase().split(' ').join('') : 'black';
+    function has (keyword) {
+        return hasKeyword(cmd, keyword);
+    }
     // Tweet Sound On Input
     sound.sendMIDI(45);
 
@@ -124,7 +122,7 @@ function streamCallback (data) {
         server.io.sockets.emit('cmd', word);
         resetState();
 
-        var coordsStr = getCoordsStr()
+        var coordsStr = getCoordsStr(cmd)
           , coords = coordinates[coordsStr]
           , image = (images.files[coordsStr]) ? coordsStr : 'tweet_bw';
         images.showImageSafe(image, function (err) {
@@ -146,6 +144,8 @@ function streamCallback (data) {
                                 sound.sendMIDI(40+note);
                             }
                         },offset);
+
+                        server.io.sockets.emit('tweet-stream', data);
 
                     });
                 });
