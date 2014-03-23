@@ -31,7 +31,7 @@ This is the code repository the installation produced and the experiments conduc
 ###Dependencies
 
 - [Node.js](http://www.nodejs.org/)
-- If you intend to connect through DMX directly from your machine (instead of sending it through Artnet)then you'll need the **FTDI Drivers** + **libftdi** (Install the later one with Homebrew or Macports)
+- If you intend to connect through DMX directly from your machine like in on of the ~old/~ samples (instead of sending it through Artnet) then you'll need the **FTDI Drivers** + **libftdi** (Install the later one with Homebrew or Macports `brew install libftdi`) and the dmx library for node (`npm install dmx`).
 
 ###Installation
 

@@ -11,6 +11,7 @@ module.exports = {
         ]
     },
     midi: {
+        enable: false,
         ports: [] // Midi ports as Integers
     }
 };

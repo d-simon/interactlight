@@ -1,7 +1,7 @@
 var midi = require('midi');
 
 function Sound (opts) {
-    this.midiPort = (opts) ? opts.midiPort || 0 : 0;
+    this.midiPort = (opts) ? (opts.midiPort || 0) : 0;
     this.midiTable = this.generateMidiTable();
     this.key = [0,2,4,5,7,9,11]; // C-Dur
     this.output = new midi.output();
