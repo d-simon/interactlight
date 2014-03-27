@@ -1,0 +1,18 @@
+{
+  "name": "video.js",
+  "version": "4.3.0",
+  "main": [
+    "video.js",
+    "video.css"
+  ],
+  "homepage": "https://github.com/videojs/video.js-component",
+  "_release": "4.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.3.0",
+    "commit": "2d800f57a4e7191567aaedc273c24e668eaf2432"
+  },
+  "_source": "git://github.com/videojs/video.js-component.git",
+  "_target": ">=3.2.0",
+  "_originalSource": "video.js"
+}

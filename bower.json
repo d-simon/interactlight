@@ -1,0 +1,15 @@
+{
+  "name": "interactlight-gh-pages",
+  "version": "0.0.0",
+  "homepage": "https://github.com/d-simon/interactlight",
+  "authors": [
+    "David Simon <me@davidsimon.ch>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "modernizr": "~2.7.2",
+    "jquery": "~2.1.0",
+    "BigVideo.js": "~1.0.8"
+  }
+}
