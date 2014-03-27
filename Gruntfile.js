@@ -198,6 +198,24 @@ module.exports = function(grunt) {
                 base: 'dist'
             },
             src: ['**']
+        },
+        prompt: {
+            'gh-pages': {
+                options: {
+                    questions: [{
+                        config: 'gh-pages-confirm',
+                        type: 'confirm',
+                        message: 'Do you really want to commit to gh-pages branch?',
+                        default: false
+                    }],
+                    then: function (answers) {
+                        if (answers['continue'] === true) {
+                        } else {
+                            grunt.fail.warn('Canceled');
+                        }
+                    }
+                }
+            },
         }
     });
 
@@ -226,6 +244,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['build']);
 
-    grunt.registerTask('publish', ['build', 'gh-pages']);
+    grunt.registerTask('publish', ['prompt:gh-pages', 'build', 'gh-pages']);
 
 };
