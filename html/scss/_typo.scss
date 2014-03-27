@@ -1,0 +1,99 @@
+$text-primary: #fff;
+
+h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dl,blockquote,p,address,table,fieldset,figure,pre {
+    margin-bottom: 1.5rem;
+}
+
+ul,ol,dd {
+    margin-left: 3rem;
+}
+
+a {
+    color: $text-primary;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a,b,strong,dt {
+    font-weight: 500;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 300;
+    color: $text-primary;
+}
+
+h1 {
+    font-size: 2.25rem;
+    line-height: 1.33333;
+}
+
+h2 {
+    font-size: 1.875rem;
+    line-height: 1.6;
+}
+
+h3 {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+h4 {
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+
+h5 {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+h6 {
+    font-size: .875rem;
+    line-height: 1.71429;
+}
+
+small {
+    font-size: .75rem;
+    line-height: 2;
+    display: inline-block;
+    color: #999;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+blockquote {
+    text-indent: -.394em;
+}
+
+blockquote p:before {
+    content: "“";
+}
+
+blockquote p:after {
+    content: "";
+}
+
+blockquote p:last-of-type:after {
+    content: "”";
+}
+
+blockquote p:last-of-type {
+    margin-bottom: 0;
+}
+
+::selection {
+    background-color: $text-primary;
+    color: #fff;
+}
+
+::-moz-selection {
+    background-color: $text-primary;
+    color: #fff;
+}

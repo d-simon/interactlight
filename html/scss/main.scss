@@ -1,6 +1,30 @@
-/* An uncompressed SCSS file ! */
+@import "_reset";
+
+@import "bourbon";
+@import "neat";
+
+@import "_typo";
+@import "_structure";
+
+html, body{
+    padding:0;
+    margin:0;
+    height: 100%;
+}
 body {
-    margin: 0;
-    padding: 0;
-    background: #eee;
+    min-height: 100%;
+    margin:0;
+    padding:0;
+    background:#222;
+    color:#fff;
+    font: 400 100%/1.5 'Montserrat', Gotham, Proxima-Nova, sans-serif;
+}
+
+div#main {
+    width:100%;
+    height:100%;
+}
+
+.vjs-control-bar {
+    display:none;
 }
