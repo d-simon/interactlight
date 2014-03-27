@@ -163,6 +163,12 @@ module.exports = function (grunt) {
                     dest: 'dist/'
                 }]
             }
+        },
+        'gh-pages': {
+            options: {
+                base: 'dist'
+            },
+            src: ['**']
         }
     });
 
@@ -191,6 +197,8 @@ grunt.registerTask('server:local', ['jshint', 'sass', 'connect:server', 'watch:m
 grunt.registerTask('server:build', ['build', 'connect:build', 'watch:build']);
 
 grunt.registerTask('default', ['build']);
+
+grunt.registerTask('publish', ['build', 'gh-pages'])
 
 
 };
