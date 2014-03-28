@@ -8,7 +8,17 @@
     right: 10px;
     bottom: 10px;
     width: 2px;
+    z-index:2;
     background:#666;
+    @include media($mobile) {
+        & {
+            display:none;
+        }
+    }
+}
+html.no-js .scrollbar,
+html.touch .scrollbar {
+    display:none;
 }
 .scrollbar .handle {
     width: 100%;
@@ -23,3 +33,4 @@
     width: 22px;
     height: 100%;
 }
+

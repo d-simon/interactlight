@@ -17,12 +17,13 @@ $(function() {
     };
     var frame = new Sly('#frame', options);
 
-    // Fix this?
-    setTimeout(function () {
-        // Initiate frame
-        frame.init();
-    }, 200);
-
+    if (!Modernizr.touch) {
+        // Fix this?
+        setTimeout(function () {
+            // Initiate frame
+            frame.init();
+        }, 200);
+    }
     // Reload on resize
     $(window).on('resize', frame.reload);
 
@@ -72,11 +73,12 @@ $(function() {
     var BV = new $.BigVideo({
         container:$('#video-bg')
     });
-    BV.init();
-    //BV.show('media/DSC_2710.mp4', { ambient: true });
-    BV.show('media/DSC_2756.mp4', { ambient: true });
 
-
+    if (!Modernizr.touch) {
+        BV.init();
+        //BV.show('media/DSC_2710.mp4', { ambient: true });
+        BV.show('media/DSC_2756.mp4', { ambient: true });
+    }
 
 
 });

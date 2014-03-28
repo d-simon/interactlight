@@ -24,7 +24,18 @@
         text-shadow: 1px 1px 0 #000;
         margin-top: -24px;
         font-weight: 400;
+
+        @include media($mobile) {
+            & {
+                width:100%;
+                font-size: 2.5rem;
+                right:4px;
+                left:4px;
+            }
+        }
+
     }
+
 }
 
 #main section {
