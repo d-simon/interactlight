@@ -7,7 +7,6 @@
 }
 
 @mixin fixedslide {
-    @include slide;
     background-attachment: fixed;
     background-size: cover;
     overflow:hidden;
@@ -23,13 +22,14 @@
         text-align: center;
         color: #fefefe;
         text-shadow: 1px 1px 0 #000;
-        margin-top: -24px;
+        margin-top: -40px;
         font-weight: 400;
 
         @include media($mobile) {
             & {
                 width:100%;
                 font-size: 2.5rem;
+                margin-top: -20px;
                 right:4px;
                 left:4px;
             }
@@ -38,14 +38,18 @@
 }
 
 #main section {
+    @include slide;
     &.home {
         @include fixedslide;
     }
     &.intro {
         @include fixedslide;
-        background:#000;
+        background:#161616;
     }
     &.how-it-works {
+        @include fixedslide;
+    }
+    &.snake {
         @include fixedslide;
     }
 }

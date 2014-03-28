@@ -32,7 +32,7 @@ $(function() {
 
 
 /* ====================================================================
-        VIDEO
+        Video
    ==================================================================== */
 
     if (!Modernizr.touch) {
@@ -63,6 +63,16 @@ $(function() {
         $('.how-it-works').waypoint(function () {
             changeVideo('media/DSC_2756');
         }, { offset: '100%' });
+        $('.how-it-works').waypoint(function () {
+            changeVideo('media/DSC_2756');
+        }, { offset: '-100%' });
+
+        $('.snake').waypoint(function () {
+            changeVideo('media/DSC_2725');
+        }, { offset: '100%' });
+        $('.snake').waypoint(function () {
+            changeVideo('media/DSC_2725');
+        }, { offset: '-100%' });
     }
 
 });
