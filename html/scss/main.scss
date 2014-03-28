@@ -3,6 +3,8 @@
 @import "bourbon";
 @import "neat";
 
+@import "_sly";
+
 @import "_typo";
 @import "_structure";
 
@@ -16,13 +18,22 @@ body {
     margin:0;
     padding:0;
     background:#222;
-    color:#fff;
-    font: 400 100%/1.5 'Montserrat', Gotham, Proxima-Nova, sans-serif;
 }
 
 div#main {
+    position:relative;
     width:100%;
-    height:100%;
+    min-height:100%;
+    z-index:2;
+}
+
+#video-bg {
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:1;
 }
 
 .vjs-control-bar {

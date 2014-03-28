@@ -7,7 +7,6 @@
 
 @mixin fixedslide {
     @include slide;
-    background:#000;
     background-attachment: fixed;
     background-size: cover;
     overflow:hidden;
@@ -21,10 +20,10 @@
         font-size: 5rem;
         line-height: 1;
         text-align: center;
-        color: #fff;
+        color: #fefefe;
         text-shadow: 1px 1px 0 #000;
         margin-top: -24px;
-        font-weight: 700;
+        font-weight: 400;
     }
 }
 
@@ -34,9 +33,13 @@
     }
     &.intro {
         @include fixedslide;
+        background:#000;
+    }
+    &.how-it-works {
+        @include fixedslide;
     }
 }
 
-    .content {
-        @include outer-container;
-    }
+.content {
+    @include outer-container;
+}

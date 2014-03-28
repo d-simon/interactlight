@@ -10,6 +10,10 @@
   "dependencies": {
     "modernizr": "~2.7.2",
     "jquery": "~2.1.0",
-    "BigVideo.js": "~1.0.8"
+    "BigVideo.js": "~1.0.8",
+    "sly": "~1.2.3",
+    "jquery-easing": "*",
+    "jquery-throttle-debounce": "*",
+    "h5bp-console-polyfill": "~0.0.2"
   }
 }
