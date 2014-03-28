@@ -3,10 +3,9 @@
 @import "bourbon";
 @import "neat";
 
+@import "_miso_web";
+
 @import "_vars";
-
-@import "_sly";
-
 @import "_typo";
 @import "_structure";
 
@@ -15,11 +14,12 @@ html, body{
     margin:0;
     height: 100%;
 }
+
 body {
     min-height: 100%;
     margin:0;
     padding:0;
-    background:#222;
+    background:#000;
 }
 
 div#main {
