@@ -209,7 +209,7 @@ module.exports = function(grunt) {
                         default: false
                     }],
                     then: function (answers) {
-                        if (answers['continue'] === true) {
+                        if (answers['gh-pages-confirm'] === true) {
                         } else {
                             grunt.fail.warn('Canceled');
                         }
