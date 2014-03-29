@@ -4,7 +4,8 @@
         Section Resize
    ==================================================================== */
 
-(function () {
+
+$(document).ready(function () {
     'use strict';
 
     window.viewportUnitsBuggyfill.init();
@@ -31,22 +32,22 @@
         $(window).on('resize', sectionResize);
     }
 
-}());
+});
 
 
 /* ====================================================================
         Video
    ==================================================================== */
 
-(function () {
+$(document).ready(function () {
     'use strict';
-
     if (!Modernizr.touch) {
 
-        var BV = new $.BigVideo({
-            container:$('#video-bg'),
-            useFlashForFirefox:false
-        });
+        var $video = $('#video-bg'),
+            BV = new $.BigVideo({
+                container: $video,
+                useFlashForFirefox:false
+            });
 
         BV.init();
         BV.show('media/DSC_2710.mp4', { ambient: true, altSource: 'media/DSC_2710.ogv' });
@@ -62,7 +63,7 @@
             };
         })();
 
-        $('.home').waypoint(function() {
+        $('.home').waypoint(function () {
             changeVideo('media/DSC_2710');
         }, { offset: '-100%' });
 
@@ -80,8 +81,7 @@
             changeVideo('media/DSC_2725');
         }, { offset: '-100%' });
     }
-
-}());
+});
 
 
 /* ====================================================================
@@ -89,12 +89,10 @@
    ==================================================================== */
     // http://css-tricks.com/snippets/jquery/calculate-distance-between-mouse-and-element/
 
-
-(function () {
+$(document).ready(function () {
     'use strict';
 
-    var mX, mY, distance,
-        $element  = $('#main-nav');
+    var mY, distance, $element = $('#main-nav');
 
     function calculateDistanceY (elem, mouseY) {
         return Math.floor(mouseY - (elem.offset().top + (elem.height() / 2)));
@@ -159,4 +157,4 @@
         }
     });
 
-}());
+});
