@@ -1,0 +1,63 @@
+@mixin slide {
+    width:100%;
+    height:100%;
+    min-height: 100vh;
+    position:relative;
+    z-index:100;
+}
+
+@mixin fixedslide {
+    background-attachment: fixed;
+    background-size: cover;
+    overflow:hidden;
+}
+
+.slide {
+    @include slide;
+    &--title {
+        @include fixedslide;
+        .tagline {
+            position: absolute;
+            top: 50%;
+            right: 24px;
+            left: 24px;
+            z-index: 10;
+            font-size: 5rem;
+            line-height: 1;
+            text-align: center;
+            color: #fefefe;
+            text-shadow: 1px 1px 0 #000;
+            margin-top: -40px;
+            font-weight: 400;
+
+            @include media($mobile) {
+                & {
+                    width:100%;
+                    font-size: 2.5rem;
+                    margin-top: -20px;
+                    right:4px;
+                    left:4px;
+                }
+            }
+        }
+    }
+    &--details {
+        @include fixedslide;
+        background:#161616;
+    }
+}
+
+html.no-video,
+html.touch {
+    .slide {
+        &--home {
+            @include srcset('../media/DSC_2710_', '.jpg');
+        }
+    }
+}
+
+html.touch {
+    .slide {
+        background-attachment: scroll;
+    }
+}

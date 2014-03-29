@@ -130,7 +130,7 @@ module.exports = function(grunt) {
         sass: {
             build: {
                 options: {
-                    includePaths: require('node-neat').includePaths,
+                    loadPath: require('node-neat').includePaths,
                     outputStyle: 'compressed'
                 },
                 files: [{
@@ -143,7 +143,7 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
-                    includePaths: require('node-neat').includePaths
+                    loadPath: require('node-neat').includePaths
                 },
                 files: [{
                     expand: true,

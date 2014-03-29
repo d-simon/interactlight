@@ -1,1 +1,24 @@
+$text-primary: #fff;
+
 $mobile: new-breakpoint(max-width 500px 6);
+$tablet: new-breakpoint(max-width 768px 6);
+$tablet-only: new-breakpoint(min-width 501px max-width 768px 6);
+$desktop: new-breakpoint(max-width 1140px 12);
+$desktop-only: new-breakpoint(min-width 769px max-width 1140px 12);
+$full: new-breakpoint(min-width 1141px 12);
+
+
+@mixin srcset($prefix, $suffix) {
+    @include media($mobile) {
+        background-image: url($prefix + 'small' + $suffix);
+    }
+    @include media($tablet-only) {
+        background-image: url($prefix + 'medium' + $suffix);
+    }
+    @include media($desktop-only) {
+        background-image: url($prefix + 'large' + $suffix);
+    }
+    @include media($full) {
+        background-image: url($prefix + 'ultra' + $suffix);
+    }
+}

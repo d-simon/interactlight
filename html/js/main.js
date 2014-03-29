@@ -13,7 +13,7 @@ $(document).ready(function () {
     if (Modernizr.cssvhunit === false || Modernizr.cssvwunit === false) {
 
         var sectionResize = (function () {
-            var $main = $('*[role="main"]'),
+            var $main = $('.main'),
                 $sectionsFull = $main.children('section.js-fullHeight'),
                 $sectionsMin = $main.children('section.js-minHeight');
 
@@ -41,9 +41,9 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     'use strict';
-    if (!Modernizr.touch) {
+    if (!Modernizr.touch && Modernizr.video) {
 
-        var $video = $('#video-bg'),
+        var $video = $('.video-bg'),
             BV = new $.BigVideo({
                 container: $video,
                 useFlashForFirefox:false
@@ -53,7 +53,7 @@ $(document).ready(function () {
         BV.show('media/DSC_2710.mp4', { ambient: true, altSource: 'media/DSC_2710.ogv' });
 
         var changeVideo = (function () {
-            var $videoBg = $('#video-bg').find('video');
+            var $videoBg = $video.find('video');
 
             return function (video) {
                 var currentVideo = $videoBg.attr('src');
@@ -63,22 +63,29 @@ $(document).ready(function () {
             };
         })();
 
-        $('.home').waypoint(function () {
+        $('.slide--home').waypoint(function () {
             changeVideo('media/DSC_2710');
         }, { offset: '-100%' });
 
-        $('.how-it-works').waypoint(function () {
+        $('.slide--how-it-works').waypoint(function () {
             changeVideo('media/DSC_2756');
         }, { offset: '100%' });
-        $('.how-it-works').waypoint(function () {
+        $('.slide--how-it-works').waypoint(function () {
             changeVideo('media/DSC_2756');
         }, { offset: '-100%' });
 
-        $('.snake').waypoint(function () {
+        $('.slide--snake').waypoint(function () {
             changeVideo('media/DSC_2725');
         }, { offset: '100%' });
-        $('.snake').waypoint(function () {
+        $('.slide--snake').waypoint(function () {
             changeVideo('media/DSC_2725');
+        }, { offset: '-100%' });
+
+        $('.slide--tech').waypoint(function () {
+            changeVideo('media/DSC_2760_dark');
+        }, { offset: '100%' });
+        $('.slide--tech').waypoint(function () {
+            changeVideo('media/DSC_2760_dark');
         }, { offset: '-100%' });
     }
 });
@@ -92,7 +99,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     'use strict';
 
-    var mY, distance, $element = $('#main-nav');
+    var mY, distance, $element = $('.head-nav');
 
     function calculateDistanceY (elem, mouseY) {
         return Math.floor(mouseY - (elem.offset().top + (elem.height() / 2)));

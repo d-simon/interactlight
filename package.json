@@ -30,8 +30,8 @@
     "connect-livereload": "~0.3.2",
     "grunt-gh-pages": "~0.9.1",
     "bourbon": "0.0.2",
-    "grunt-sass": "~0.12.0",
     "node-neat": "~1.1.0",
-    "grunt-prompt": "~1.1.0"
+    "grunt-prompt": "~1.1.0",
+    "grunt-contrib-sass": "~0.7.3"
   }
 }

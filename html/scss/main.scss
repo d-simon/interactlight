@@ -9,7 +9,7 @@ $max-width: 1140px;
 @import "_vars";
 @import "_typo";
 @import "_nav";
-@import "_structure";
+@import "_slides";
 
 html, body{
     padding:0;
@@ -25,14 +25,14 @@ body {
 }
 
 
-div#main {
+.main {
     position:relative;
     width:100%;
     min-height:100%;
     z-index:2;
 }
 
-#video-bg {
+.video-bg {
     position:fixed;
     top:0;
     right:0;
@@ -43,4 +43,14 @@ div#main {
 
 .vjs-control-bar {
     display:none;
+}
+
+.content {
+    @include outer-container;
+    &__main-title {
+        font-size: 4rem;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        text-align: center;
+    }
 }

@@ -1,4 +1,4 @@
-#main-nav {
+.head-nav {
     position:fixed;
     z-index:200;
     top: 0;
@@ -58,10 +58,10 @@
         transition: transform .2s,background .3s;
     }
 
-    .navigation {
+    &__nav {
         @include outer-container;
         padding:0 20px;
-        font-size: 1.4rem;
+        font-size: 1.25rem;
         vertical-align: top;
         line-height:45px;
         &, a {
@@ -69,20 +69,20 @@
         }
     }
 
-    .nav-logo {
+    &__logo {
         float:left;
     }
 
-    .nav-menu {
+    &__menu {
         float:right;
     }
-    .nav-icon {
+    &__menu-icon {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 2rem;
         line-height: 1rem;
         vertical-align: middle;
         display:inline-block;
-        margin-top: -2spx;
+        margin-top: -2px;
     }
 
 }

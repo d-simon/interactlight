@@ -1,8 +1,6 @@
-$text-primary: #fff;
-
 body {
     color:$text-primary;
-    font: 400 100%/1.5 'Miso', 'Montserrat', Gotham, Proxima-Nova, sans-serif;
+    font: 400 100%/1.5 Ubuntu, Proxima-Nova, sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dl,blockquote,p,address,table,fieldset,figure,pre {
@@ -29,6 +27,7 @@ a,b,strong,dt {
 h1,h2,h3,h4,h5,h6 {
     font-weight: 300;
     color: $text-primary;
+    font-family: 'Miso', Ubuntu, sans-serif;
 }
 
 h1 {
@@ -71,26 +70,6 @@ small {
 img {
     max-width: 100%;
     height: auto;
-}
-
-blockquote {
-    text-indent: -.394em;
-}
-
-blockquote p:before {
-    content: "“";
-}
-
-blockquote p:after {
-    content: "";
-}
-
-blockquote p:last-of-type:after {
-    content: "”";
-}
-
-blockquote p:last-of-type {
-    margin-bottom: 0;
 }
 
 ::selection {
