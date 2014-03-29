@@ -1,12 +1,14 @@
 @import "_reset";
 
 @import "bourbon";
+$max-width: 1140px;
 @import "neat";
 
 @import "_miso_web";
 
 @import "_vars";
 @import "_typo";
+@import "_nav";
 @import "_structure";
 
 html, body{
@@ -22,94 +24,6 @@ body {
     background:#000;
 }
 
-#main-nav {
-    position:fixed;
-    z-index:200;
-    top: 0;
-    left: 0;
-    width: 100%;
-    -webkit-transform: translate(0,0);
-    -moz-transform: translate(0,0);
-    -ms-transform: translate(0,0);
-    -o-transform: translate(0,0);
-    transform: translate(0,0);
-    -webkit-transition: -webkit-transform .5s .5s,background .5s;
-    -moz-transition: -moz-transform .5s .5s,background .5s;
-    -o-transition: -o-transform .5s .5s,background .5s;
-    transition: transform .5s .5s,background .5s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-
-    &.detached {
-        position: fixed;
-        //background: #fff;
-        background: rgba(0,0,0,1);
-        -webkit-transition: -webkit-transform .3s,background .1s;
-        -moz-transition: -moz-transform .3s,background .1s;
-        -o-transition: -o-transform .3s,background .1s;
-        transition: transform .3s,background .1s;
-    }
-    &:not(.detached):hover {
-        background: rgba(0,0,0,1);
-        cursor: pointer;
-    }
-
-    &.hidden {
-        opacity: 0;
-        -webkit-transform: translate(0,-60px);
-        -moz-transform: translate(0,-60px);
-        -ms-transform: translate(0,-60px);
-        -o-transform: translate(0,-60px);
-        transform: translate(0,-60px);
-        -webkit-transition: -webkit-transform .2s,background .3s,color .3s,opacity .3s;
-        -moz-transition: -moz-transform .2s,background .3s,color .3s,opacity .3s;
-        -o-transition: -o-transform .2s,background .3s,color .3s,opacity .3s;
-        transition: transform .2s,background .3s,color .3s,opacity .3s;
-    }
-    &.visible {
-        opacity: 1;
-        -webkit-transform: translate(0,0);
-        -moz-transform: translate(0,0);
-        -ms-transform: translate(0,0);
-        -o-transform: translate(0,0);
-        transform: translate(0,0);
-        -webkit-transition: -webkit-transform .2s,background .3s;
-        -moz-transition: -moz-transform .2s,background .3s;
-        -o-transition: -o-transform .2s,background .3s;
-        transition: transform .2s,background .3s;
-    }
-
-    .navigation {
-        @include outer-container;
-        padding:0 20px;
-        font-size: 1.4rem;
-        vertical-align: top;
-        line-height:45px;
-        &, a {
-           font-weight:300;
-        }
-    }
-
-    .nav-logo {
-        float:left;
-    }
-
-    .nav-menu {
-        float:right;
-    }
-    .nav-icon {
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 2rem;
-        line-height: 1rem;
-        vertical-align: middle;
-        display:inline-block;
-        margin-top: -2spx;
-    }
-
-}
 
 div#main {
     position:relative;
