@@ -1,5 +1,10 @@
 #InteractLight Documentation
 
+This is the documentation repository of the [InteractLight](https://github.com/d-simon/interactlight) project.
+
+View the [Documentation](http://d-simon.github.io/interactlight)
+
+
 ## Getting Started
 This project equires Grunt `~0.4.0`
 
