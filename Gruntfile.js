@@ -174,7 +174,7 @@ module.exports = function(grunt) {
         htmlmin: {
             main: {
                 options: {
-                    removeComments: true,
+                    removeComments: false,
                     collapseWhitespace: true
                 },
                 files: {
