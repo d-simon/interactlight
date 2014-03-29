@@ -1,10 +1,11 @@
 /* global $, Modernizr */
-$(function() {
-    'use strict';
 
 /* ====================================================================
         Section Resize
    ==================================================================== */
+
+(function () {
+    'use strict';
 
     window.viewportUnitsBuggyfill.init();
 
@@ -30,10 +31,15 @@ $(function() {
         $(window).on('resize', sectionResize);
     }
 
+}());
+
 
 /* ====================================================================
         Video
    ==================================================================== */
+
+(function () {
+    'use strict';
 
     if (!Modernizr.touch) {
 
@@ -75,4 +81,82 @@ $(function() {
         }, { offset: '-100%' });
     }
 
-});
+}());
+
+
+/* ====================================================================
+        Navigation
+   ==================================================================== */
+    // http://css-tricks.com/snippets/jquery/calculate-distance-between-mouse-and-element/
+
+
+(function () {
+    'use strict';
+
+    var mX, mY, distance,
+        $element  = $('#main-nav');
+
+    function calculateDistanceY (elem, mouseY) {
+        return Math.floor(mouseY - (elem.offset().top + (elem.height() / 2)));
+    }
+
+
+    var navVisible = $.debounce(100, function (show) {
+        if (show === true) {
+            $element.addClass('visible').removeClass('hidden');
+        } else {
+            $element.addClass('hidden').removeClass('visible');
+        }
+    });
+
+    var previousDistance = $(window).height();
+    $(document).mousemove(function (e) {
+        mY = e.pageY;
+        distance = calculateDistanceY($element, mY);
+        if (distance < 100 && previousDistance > 100 && $(window).scrollTop() > 150) {
+            navVisible(true);
+        } else if($(window).scrollTop() <= 150) {
+            $element.removeClass('detached').removeClass('hidden');
+        }
+        previousDistance = distance;
+    });
+
+    $(document).scroll(function (e) {
+        if($(window).scrollTop() > 150) {
+            if (!$element.hasClass('detached')) {
+                $element.addClass('hidden');
+            }
+            $element.addClass('detached');
+        } else {
+            $element.removeClass('detached').removeClass('hidden');
+        }
+    });
+
+    var previousScroll = 0;
+
+    $(window).scroll(function (e) {
+        var currentScroll = $(this).scrollTop();
+        if (currentScroll > previousScroll){
+            // down
+            navVisible(false);
+        } else {
+            // up
+            navVisible(true);
+        }
+        previousScroll = currentScroll;
+    });
+
+    var disableTimeout;
+    $element.mouseover(function (e) {
+        clearTimeout(disableTimeout);
+    });
+    $element.mouseout(function (e) {
+        if ($(window).scrollTop() > 150) {
+            disableTimeout = setTimeout(function() {
+                previousDistance = 0;
+                navVisible(false);
+            }, 500);
+        }
+    });
+
+}());
