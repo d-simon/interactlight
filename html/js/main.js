@@ -14,8 +14,8 @@ $(document).ready(function () {
 
         var sectionResize = (function () {
             var $main = $('.main'),
-                $sectionsFull = $main.children('section.js-fullHeight'),
-                $sectionsMin = $main.children('section.js-minHeight');
+                $sectionsFull = $main.children('.js-fullHeight'),
+                $sectionsMin = $main.children('.js-minHeight');
 
             return $.debounce(33, function () { // ~30 fps
                 for (var i = 0; i < $sectionsFull.length; i++) {
