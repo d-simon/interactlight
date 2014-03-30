@@ -43,7 +43,8 @@
     }
     &--details {
         @include fixedslide;
-        background:#161616;
+        background: #111;
+        background: rgba(0,0,0,0.9);
     }
 }
 
@@ -52,6 +53,9 @@ html.touch {
     .slide {
         &--home {
             @include srcset('../media/DSC_2710_', '.jpg');
+        }
+        &--details {
+            background: #111;
         }
     }
 }

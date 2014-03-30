@@ -1,6 +1,7 @@
 body {
     color:$text-primary;
-    font: 400 100%/1.5 Ubuntu, Proxima-Nova, sans-serif;
+    color:#eee;
+    font: 300 100%/1.5 'Open Sans', Ubuntu, sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dl,blockquote,p,address,table,fieldset,figure,pre {
@@ -14,6 +15,29 @@ ul,ol,dd {
 a {
     color: $text-primary;
     text-decoration: none;
+}
+
+p {
+    position: relative;
+    font-size: 1.4rem;
+    line-height: 1.75;
+    @include media($mobile) {
+        font-size: 1.2rem;
+        line-height: 1.75;
+    }
+    margin-bottom:30px;
+
+    &:after {
+        content: " ";
+        display: block;
+        width: 40px;
+        height: 2px;
+        margin:35px auto 31px;
+        background: #a00;
+    }
+    &:last-of-type:after {
+        display:none;
+    }
 }
 
 a:hover {

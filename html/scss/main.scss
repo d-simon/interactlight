@@ -53,4 +53,9 @@ body {
         margin-bottom: 4rem;
         text-align: center;
     }
+    &__text {
+        max-width: 600px;
+        margin: 15px auto;
+        padding: 10px;
+    }
 }
