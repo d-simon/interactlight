@@ -35,8 +35,11 @@ p {
         margin:35px auto 31px;
         background: #a00;
     }
-    &:last-of-type:after {
-        display:none;
+    &:last-of-type {
+        margin-bottom:85px;
+        &:after {
+            display:none;
+        }
     }
 }
 
