@@ -194,12 +194,13 @@ module.exports = function(grunt) {
         },
         'gh-pages': {
             options: {
-                base: 'dist'
+                base: 'dist',
+                message: 'Auto-generated commit'
             },
             src: ['**']
         },
         prompt: {
-            'gh-pages': {
+            'gh-pages-confirm': {
                 options: {
                     questions: [{
                         config: 'gh-pages-confirm',
@@ -208,13 +209,12 @@ module.exports = function(grunt) {
                         default: false
                     }],
                     then: function (answers) {
-                        if (answers['gh-pages-confirm'] === true) {
-                        } else {
+                        if (answers['gh-pages-confirm'] !== true) {
                             grunt.fail.warn('Canceled');
                         }
                     }
                 }
-            },
+            }
         }
     });
 
@@ -243,6 +243,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['build']);
 
-    grunt.registerTask('publish', ['prompt:gh-pages', 'build', 'gh-pages']);
+    grunt.registerTask('publish', ['prompt:gh-pages-confirm', 'build', 'gh-pages']);
 
 };
