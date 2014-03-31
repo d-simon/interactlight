@@ -66,6 +66,21 @@ html.touch {
         &--home {
             @include srcset('../media/DSC_2710_', '.jpg');
         }
+        &--how-it-works {
+            @include srcset('../media/DSC_2756_', '.jpg');
+            background-position: center center;
+        }
+        &--snake {
+            @include srcset('../media/DSC_2725_', '.jpg');
+            background-position: center center;
+            @include media($mobile) {
+                background-position: 40% center;
+            }
+        }
+        &--tech {
+            @include srcset('../media/DSC_2760_', '.jpg');
+            background-position: 60% center;
+        }
         &--details {
             background: #111;
         }
