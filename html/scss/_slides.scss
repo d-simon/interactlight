@@ -41,7 +41,7 @@
                     left:4px;
                 }
             }
-            @include media($mobile-wide) {
+            @include media($mobile-wide-only) {
                 & {
                     width:100%;
                     @include x-rem(font-size, 4);
