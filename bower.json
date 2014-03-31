@@ -14,6 +14,7 @@
     "jquery-throttle-debounce": "*",
     "h5bp-console-polyfill": "~0.0.2",
     "jquery-waypoints": "~2.0.4",
-    "respond": "~1.4.2"
+    "respond": "~1.4.2",
+    "fastclick": "~1.0.0"
   }
 }
