@@ -4,6 +4,8 @@ body {
     color:$text-primary;
     color:#eee;
     font: 300 100%/1.5 'Open Sans', Ubuntu, sans-serif;
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
+    -webkit-font-smoothing: antialiased;
 }
 
 h1,h2,h3,h4,h5,h6,hgroup,ul,ol,dl,blockquote,p,address,table,fieldset,figure,pre {
@@ -23,9 +25,8 @@ p {
     position: relative;
     @include x-rem(font-size, 1.4);
     line-height: 1.75;
-    @include media($mobile) {
+    @include media($mobile-wide) {
         @include x-rem(font-size, 1.2);
-        line-height: 1.75;
     }
     margin-bottom:30px;
 

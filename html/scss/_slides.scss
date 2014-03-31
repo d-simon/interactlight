@@ -41,6 +41,15 @@
                     left:4px;
                 }
             }
+            @include media($mobile-wide) {
+                & {
+                    width:100%;
+                    @include x-rem(font-size, 4);
+                    margin-top: -20px;
+                    right:4px;
+                    left:4px;
+                }
+            }
         }
     }
     &--details {

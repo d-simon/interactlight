@@ -1,10 +1,12 @@
 $text-primary: #fff;
 
-$mobile: new-breakpoint(max-width 500px 6);
-$tablet: new-breakpoint(max-width 768px 6);
-$tablet-only: new-breakpoint(min-width 501px max-width 768px 6);
+$mobile: new-breakpoint(max-width 479px 6);
+$mobile-wide: new-breakpoint(max-width 767px 6);
+$mobile-wide-only: new-breakpoint(min-width 480px max-width 767px 6);
+$tablet: new-breakpoint(max-width 959px 12);
+$tablet-only: new-breakpoint(min-width 768px max-width 959px 12);
 $desktop: new-breakpoint(max-width 1140px 12);
-$desktop-only: new-breakpoint(min-width 769px max-width 1140px 12);
+$desktop-only: new-breakpoint(min-width 960px max-width 1140px 12);
 $full: new-breakpoint(min-width 1141px 12);
 
 
@@ -12,8 +14,11 @@ $full: new-breakpoint(min-width 1141px 12);
     @include media($mobile) {
         background-image: url($prefix + 'small' + $suffix);
     }
-    @include media($tablet-only) {
+    @include media($mobile-wide-only) {
         background-image: url($prefix + 'medium' + $suffix);
+    }
+    @include media($tablet-only) {
+        background-image: url($prefix + 'large' + $suffix);
     }
     @include media($desktop-only) {
         background-image: url($prefix + 'large' + $suffix);

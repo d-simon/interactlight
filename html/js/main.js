@@ -120,6 +120,8 @@ $(document).ready(function () {
 
     var mY, distance, $headNav = $('.head-nav');
 
+    var $toggle = $headNav.find('.head-nav__menu-toggle');
+
     function calculateDistanceY (elem, mouseY) {
         return Math.floor(mouseY - (elem.offset().top + (elem.height() / 2)));
     }
@@ -150,13 +152,17 @@ $(document).ready(function () {
     $headNav.mouseover(function (e) {
         clearTimeout(disableTimeout);
     });
-    $headNav.mouseout(function (e) {
+    $headNav.mouseleave(function (e) {
         if ($(window).scrollTop() > 150) {
             disableTimeout = setTimeout(function() {
                 previousDistance = 0;
                 navVisible(false);
             }, 500);
         }
+        $toggle.prop('checked', false);
+    });
+    $headNav.find('.head-nav__menu label').mouseover(function (e) {
+        $toggle.prop('checked', true);
     });
 
     // Handle Scrolling
@@ -186,13 +192,19 @@ $(document).ready(function () {
     });
 
     // Menu
-    var $toggle = $headNav.find('.head-nav__menu-toggle');
-    console.log($toggle);
     $headNav.find('.head-nav__menu-label').click(function (e) {
         e.preventDefault();
         $toggle.prop('checked', !$toggle.is(':checked'));
     })
     $('.head-nav__menu-list').children('li').click(function () {
         $toggle.prop('checked', false);
+    });
+
+    $toggle.change(function(){
+        if($toggle.is(':checked')){
+            $headNav.addClass('dark');
+        } else {
+            $headNav.removeClass('dark');
+        }
     });
 });
