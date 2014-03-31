@@ -140,9 +140,9 @@ $(document).ready(function () {
     $(document).mousemove(function (e) {
         mY = e.pageY;
         distance = calculateDistanceY($headNav, mY);
-        if (distance < 100 && previousDistance > $headNav.height() && $(window).scrollTop() > 150) {
+        if (distance < 100 && previousDistance > $headNav.height() && $(window).scrollTop() > 0) {
             navVisible(true);
-        } else if($(window).scrollTop() <= 150) {
+        } else if($(window).scrollTop() <= 0) {
             $headNav.removeClass('detached').removeClass('hidden').removeClass('visible');
         }
         previousDistance = distance;
@@ -153,7 +153,7 @@ $(document).ready(function () {
         clearTimeout(disableTimeout);
     });
     $headNav.mouseleave(function (e) {
-        if ($(window).scrollTop() > 150) {
+        if ($(window).scrollTop() > 0) {
             disableTimeout = setTimeout(function() {
                 previousDistance = 0;
                 navVisible(false);
@@ -167,7 +167,7 @@ $(document).ready(function () {
 
     // Handle Scrolling
     $(document).scroll(function (e) {
-        if($(window).scrollTop() > 150) {
+        if($(window).scrollTop() > 0) {
             if (!$headNav.hasClass('detached')) {
                 $headNav.addClass('hidden');
             }
