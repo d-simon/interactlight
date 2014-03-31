@@ -119,7 +119,6 @@ $(document).ready(function () {
         return Math.floor(mouseY - (elem.offset().top + (elem.height() / 2)));
     }
 
-
     var navVisible = $.debounce(100, function (show) {
         if (show === true) {
             $element.addClass('visible').removeClass('hidden');
@@ -128,6 +127,8 @@ $(document).ready(function () {
         }
     });
 
+
+    // Handle Mouse
     var previousDistance = $(window).height();
     $(document).mousemove(function (e) {
         mY = e.pageY;
@@ -135,34 +136,9 @@ $(document).ready(function () {
         if (distance < 100 && previousDistance > 100 && $(window).scrollTop() > 150) {
             navVisible(true);
         } else if($(window).scrollTop() <= 150) {
-            $element.removeClass('detached').removeClass('hidden');
+            $element.removeClass('detached').removeClass('hidden').removeClass('visible');
         }
         previousDistance = distance;
-    });
-
-    $(document).scroll(function (e) {
-        if($(window).scrollTop() > 150) {
-            if (!$element.hasClass('detached')) {
-                $element.addClass('hidden');
-            }
-            $element.addClass('detached');
-        } else {
-            $element.removeClass('detached').removeClass('hidden');
-        }
-    });
-
-    var previousScroll = 0;
-
-    $(window).scroll(function (e) {
-        var currentScroll = $(this).scrollTop();
-        if (currentScroll > previousScroll){
-            // down
-            navVisible(false);
-        } else {
-            // up
-            navVisible(true);
-        }
-        previousScroll = currentScroll;
     });
 
     var disableTimeout;
@@ -176,6 +152,32 @@ $(document).ready(function () {
                 navVisible(false);
             }, 500);
         }
+    });
+
+    // Handle Scrolling
+    $(document).scroll(function (e) {
+        if($(window).scrollTop() > 150) {
+            if (!$element.hasClass('detached')) {
+                $element.addClass('hidden');
+            }
+            $element.addClass('detached');
+        } else {
+            $element.removeClass('detached').removeClass('hidden').removeClass('visible');
+        }
+    });
+
+    var previousScroll = 0;
+
+    $(window).scroll(function (e) {
+        var currentScroll = $(this).scrollTop();
+        if (currentScroll > previousScroll && currentScroll !== 0){
+            // down
+            navVisible(false);
+        } else {
+            // up
+            navVisible(true);
+        }
+        previousScroll = currentScroll;
     });
 
 });
