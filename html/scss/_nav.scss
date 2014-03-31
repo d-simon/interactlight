@@ -23,16 +23,12 @@
 
     &.detached {
         position: fixed;
-        //background: #fff;
-        background: rgba(0,0,0,1);
+        background: #000;
+        background: rgba(0,0,0,0.9);
         -webkit-transition: -webkit-transform .3s,background .1s;
         -moz-transition: -moz-transform .3s,background .1s;
         -o-transition: -o-transform .3s,background .1s;
         transition: transform .3s,background .1s;
-    }
-    &:not(.detached):hover {
-        background: rgba(0,0,0,1);
-        cursor: pointer;
     }
 
     &.hidden {
@@ -69,14 +65,54 @@
         &, a {
            font-weight:300;
         }
+        @include media ($tablet) {
+            line-height:39px;
+        }
     }
+
 
     &__logo {
         float:left;
     }
 
     &__menu {
+        position:relative;
         float:right;
+    }
+
+    &__menu label {
+        cursor:pointer;
+    }
+    &__menu-toggle {
+        display: none;
+    }
+    &__menu-list {
+        position:fixed;
+        top:45px;
+        left:0px;
+        right:0px;
+        width:200px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .2s linear;
+
+        background:#000;
+        li {
+            border-bottom:#333 1px solid;
+        }
+        @include media ($tablet) {
+            top:39px;
+            right:-20px;
+            left:-20px;
+            li {
+                line-height:39px;
+                height:39px;
+            }
+        }
+    }
+    &__menu-toggle:checked + &__menu-list {
+        display: block;
+        max-height: 300px;
     }
     &__menu-icon {
         font-family: Helvetica, Arial, sans-serif;
@@ -88,3 +124,15 @@
     }
 
 }
+
+html.touch {
+     .head-nav {
+        background: rgba(0,0,0,1);
+    }
+}
+html.no-touch {
+    .head-nav:not(.detached):hover {
+        background: rgba(0,0,0,1);
+    }
+}
+

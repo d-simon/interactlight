@@ -113,7 +113,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     'use strict';
 
-    var mY, distance, $element = $('.head-nav');
+    // instantiate Fast-Click
+    if (Modernizr.touch) {
+        FastClick.attach(document.body);
+    }
+
+    var mY, distance, $headNav = $('.head-nav');
 
     function calculateDistanceY (elem, mouseY) {
         return Math.floor(mouseY - (elem.offset().top + (elem.height() / 2)));
@@ -121,9 +126,9 @@ $(document).ready(function () {
 
     var navVisible = $.debounce(100, function (show) {
         if (show === true) {
-            $element.addClass('visible').removeClass('hidden');
+            $headNav.addClass('visible').removeClass('hidden');
         } else {
-            $element.addClass('hidden').removeClass('visible');
+            $headNav.addClass('hidden').removeClass('visible');
         }
     });
 
@@ -132,20 +137,20 @@ $(document).ready(function () {
     var previousDistance = $(window).height();
     $(document).mousemove(function (e) {
         mY = e.pageY;
-        distance = calculateDistanceY($element, mY);
-        if (distance < 100 && previousDistance > 100 && $(window).scrollTop() > 150) {
+        distance = calculateDistanceY($headNav, mY);
+        if (distance < 100 && previousDistance > $headNav.height() && $(window).scrollTop() > 150) {
             navVisible(true);
         } else if($(window).scrollTop() <= 150) {
-            $element.removeClass('detached').removeClass('hidden').removeClass('visible');
+            $headNav.removeClass('detached').removeClass('hidden').removeClass('visible');
         }
         previousDistance = distance;
     });
 
     var disableTimeout;
-    $element.mouseover(function (e) {
+    $headNav.mouseover(function (e) {
         clearTimeout(disableTimeout);
     });
-    $element.mouseout(function (e) {
+    $headNav.mouseout(function (e) {
         if ($(window).scrollTop() > 150) {
             disableTimeout = setTimeout(function() {
                 previousDistance = 0;
@@ -157,12 +162,12 @@ $(document).ready(function () {
     // Handle Scrolling
     $(document).scroll(function (e) {
         if($(window).scrollTop() > 150) {
-            if (!$element.hasClass('detached')) {
-                $element.addClass('hidden');
+            if (!$headNav.hasClass('detached')) {
+                $headNav.addClass('hidden');
             }
-            $element.addClass('detached');
+            $headNav.addClass('detached');
         } else {
-            $element.removeClass('detached').removeClass('hidden').removeClass('visible');
+            $headNav.removeClass('detached').removeClass('hidden').removeClass('visible');
         }
     });
 
@@ -180,4 +185,14 @@ $(document).ready(function () {
         previousScroll = currentScroll;
     });
 
+    // Menu
+    var $toggle = $headNav.find('.head-nav__menu-toggle');
+    console.log($toggle);
+    $headNav.find('.head-nav__menu-label').click(function (e) {
+        e.preventDefault();
+        $toggle.prop('checked', !$toggle.is(':checked'));
+    })
+    $('.head-nav__menu-list').children('li').click(function () {
+        $toggle.prop('checked', false);
+    });
 });

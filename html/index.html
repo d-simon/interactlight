@@ -27,14 +27,23 @@
     <div class="head-nav">
         <nav class="head-nav__nav">
             <a href="#" class="head-nav__logo">@InteractLight</a>
-            <div class="head-nav__menu">Menu <span class="head-nav__menu-icon">&equiv; </span></div>
+            <div class="head-nav__menu">
+                <label for="head-nav__menu-toggle" class="head-nav__menu-label">Menu <span class="head-nav__menu-icon">&equiv; </span></label>
+                <input type="checkbox" id="head-nav__menu-toggle" class="head-nav__menu-toggle"/>
+                <ul class="head-nav__menu-list">
+                    <li><a href="#intro">Introduction</a></li>
+                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#gamification">Gamification</a></li>
+                    <li><a href="#tech">Tech</a></li>
+                </ul>
+            </div>
         </nav>
     </div>
     <div class="main" role="main">
         <section class="slide slide--title slide--home js-fullHeight">
             <h1 class="tagline">@InteractLight</h1>
         </section>
-        <section class="slide slide--details slide--intro js-minHeight">
+        <section class="slide slide--details slide--intro js-minHeight" id="intro">
             <div class="content">
                 <h3 class="content__main-title">Introduction</h3>
                 <div class="content__text">
@@ -45,7 +54,7 @@
                 </div>
             </div>
         </section>
-        <section class="slide slide--title slide--how-it-works js-fullHeight">
+        <section class="slide slide--title slide--how-it-works js-fullHeight" id="how-it-works">
             <h2 class="tagline">How it works</h2>
         </section>
         <section class="slide slide--details slide--intro js-minHeight">
@@ -53,7 +62,7 @@
                 <h3 class="content__main-title">Functionality</h3>
             </div>
         </section>
-        <section class="slide slide--title slide--snake js-fullHeight">
+        <section class="slide slide--title slide--snake js-fullHeight" id="gamification">
             <h2 class="tagline">Snake</h1>
         </section>
         <section class="slide slide--details slide--game js-minHeight">
@@ -61,7 +70,7 @@
                 <h3 class="content__main-title">Gamification</h3>
             </div>
         </section>
-        <section class="slide slide--title slide--tech js-fullHeight">
+        <section class="slide slide--title slide--tech js-fullHeight" id="tech">
             <h2 class="tagline">Tech</h1>
         </section>
         <section class="slide slide--details slide--tech-details js-minHeight">
@@ -75,6 +84,7 @@
 
     <script src="components/h5bp-console-polyfill/console.js"></script>
     <script src="components/viewport-units-buggyfill/viewport-units-buggyfill.js"></script>
+    <script src="components/fastclick/lib/fastclick.js"></script>
     <script src="components/jquery/dist/jquery.js"></script>
     <script src="components/jquery-waypoints/waypoints.js"></script>
     <script src="components/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
