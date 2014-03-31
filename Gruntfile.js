@@ -77,7 +77,8 @@ module.exports = function(grunt) {
                     src: [
                         'index.html',
                         '.htaccess',
-                        'media/**'
+                        'media/**',
+                        'font/**'
                     ],
                     dest: 'dist/'
                 }]

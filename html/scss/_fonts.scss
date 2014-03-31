@@ -1,0 +1,36 @@
+/* _fonts.scss */
+
+@font-face {
+    font-family: 'Miso';
+    src: url('../font/miso-bold-webfont.eot');
+    src: url('../font/miso-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/miso-bold-webfont.woff') format('woff'),
+         url('../font/miso-bold-webfont.ttf') format('truetype'),
+         url('../font/miso-bold-webfont.svg#misobold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Miso';
+    src: url('../font/miso-light-webfont.eot');
+    src: url('../font/miso-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/miso-light-webfont.woff') format('woff'),
+         url('../font/miso-light-webfont.ttf') format('truetype'),
+         url('../font/miso-light-webfont.svg#misolight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Miso';
+    src: url('../font/miso-regular-webfont.eot');
+    src: url('../font/miso-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/miso-regular-webfont.woff') format('woff'),
+         url('../font/miso-regular-webfont.ttf') format('truetype'),
+         url('../font/miso-regular-webfont.svg#misoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
