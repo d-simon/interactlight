@@ -1,3 +1,5 @@
+/* _slides.scss */
+
 @mixin slide {
     width:100%;
     min-height: 100%;
@@ -22,7 +24,7 @@
             right: 24px;
             left: 24px;
             z-index: 10;
-            font-size: 5rem;
+            @include x-rem(font-size, 5);
             line-height: 1;
             text-align: center;
             color: #fefefe;
@@ -33,7 +35,7 @@
             @include media($mobile) {
                 & {
                     width:100%;
-                    font-size: 2.5rem;
+                    @include x-rem(font-size, 2.5);
                     margin-top: -20px;
                     right:4px;
                     left:4px;
@@ -48,7 +50,8 @@
     }
 }
 
-html.no-video,
+html.no-video.no-flash,
+html.no-videojs,
 html.touch {
     .slide {
         &--home {

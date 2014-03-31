@@ -63,7 +63,7 @@
     &__nav {
         @include outer-container;
         padding:0 20px;
-        font-size: 1.25rem;
+        @include x-rem(font-size, 1.25);
         vertical-align: top;
         line-height:45px;
         &, a {
@@ -80,8 +80,8 @@
     }
     &__menu-icon {
         font-family: Helvetica, Arial, sans-serif;
-        font-size: 2rem;
-        line-height: 1rem;
+        @include x-rem(font-size, 2);
+        line-height: 1;
         vertical-align: middle;
         display:inline-block;
         margin-top: -2px;

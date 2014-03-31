@@ -50,9 +50,9 @@ body {
 .content {
     @include outer-container;
     &__main-title {
-        font-size: 4rem;
-        margin-top: 4rem;
-        margin-bottom: 4rem;
+        @include x-rem(font-size, 4);
+        @include x-rem(margin-top, 4);
+        @include x-rem(margin-bottom, 4);
         text-align: center;
     }
     &__text {

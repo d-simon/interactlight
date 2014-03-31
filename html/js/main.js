@@ -41,6 +41,17 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     'use strict';
+
+    var flash = false;
+    if (typeof navigator.plugins !== "undefined" &&
+        typeof navigator.plugins["Shockwave Flash"] === "object"
+    ) {
+        $('html').addClass('flash');
+        flash = true;
+    } else {
+        $('html').addClass('no-flash');
+    }
+
     if (!Modernizr.touch && Modernizr.video) {
 
         var $video = $('.video-bg'),
@@ -87,6 +98,9 @@ $(document).ready(function () {
         $('.slide--tech').waypoint(function () {
             changeVideo('media/DSC_2760_dark');
         }, { offset: '-100%' });
+
+    } else {
+        $('html').addClass('no-videojs')
     }
 });
 
