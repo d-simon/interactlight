@@ -164,10 +164,10 @@ $headNav-height-compressed:           39px;
     overflow:visible;
 }
 
-html.ie6,
-html.ie7,
-html.ie8,
-html.no-js {
+.ie6,
+.ie7,
+.ie8,
+.no-js {
     #{$headNav} {
         -webkit-transition: -webkit-transform .3s .3s,background .3s;
         -moz-transition: -moz-transform .3s .3s,background .3s;
@@ -193,7 +193,7 @@ html.no-js {
     }
 }
 
-html.no-touch {
+.no-touch {
     #{$headNav}:hover {
         background: $headNav-bgcolor-solid;
     }

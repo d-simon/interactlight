@@ -59,13 +59,13 @@
     }
 }
 
-html.ie6,
-html.ie7,
-html.ie8,
-html.no-js,
-html.no-video.no-flash,
-html.no-videojs,
-html.touch {
+.ie6,
+.ie7,
+.ie8,
+.no-js,
+.no-video.no-flash,
+.no-videojs,
+.touch {
     .slide {
         &--home {
             @include srcset('../media/DSC_2710_', '.jpg');
@@ -90,7 +90,7 @@ html.touch {
         }
     }
 }
-html.touch {
+.touch {
     .slide {
         background-attachment: scroll;
     }
