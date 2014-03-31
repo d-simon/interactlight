@@ -13,6 +13,7 @@
     "BigVideo.js": "~1.0.8",
     "jquery-throttle-debounce": "*",
     "h5bp-console-polyfill": "~0.0.2",
-    "jquery-waypoints": "~2.0.4"
+    "jquery-waypoints": "~2.0.4",
+    "respond": "~1.4.2"
   }
 }
