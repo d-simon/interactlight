@@ -181,7 +181,7 @@ $(document).ready(function () {
 
     $(window).scroll(function (e) {
         var currentScroll = $(this).scrollTop();
-        if (currentScroll > previousScroll && currentScroll !== 0){
+        if (currentScroll > previousScroll && currentScroll > 0){
             // down
             navVisible(false);
         } else {

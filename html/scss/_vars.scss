@@ -1,4 +1,4 @@
-$text-primary: #fff;
+$text-color-primary: #fff;
 
 $mobile: new-breakpoint(max-width 479px 6);
 $mobile-wide: new-breakpoint(max-width 767px 6);
@@ -10,17 +10,14 @@ $desktop-only: new-breakpoint(min-width 960px max-width 1140px 12);
 $full: new-breakpoint(min-width 1141px 12);
 
 
-@mixin srcset($prefix, $suffix) {
+@mixin srcset ($prefix, $suffix) {
     @include media($mobile) {
         background-image: url($prefix + 'small' + $suffix);
     }
     @include media($mobile-wide-only) {
         background-image: url($prefix + 'medium' + $suffix);
     }
-    @include media($tablet-only) {
-        background-image: url($prefix + 'large' + $suffix);
-    }
-    @include media($desktop-only) {
+    @include media($tablet-only, $desktop-only) {
         background-image: url($prefix + 'large' + $suffix);
     }
     @include media($full) {
@@ -28,11 +25,25 @@ $full: new-breakpoint(min-width 1141px 12);
     }
 }
 
-@function strip-unit($num) {
+@mixin x-rgba ($property, $r, $g, $b, $a) {
+    #{$property}: rgb($r, $g, $b);
+    #{$property}: rgba($r, $g, $b, $a);
+}
+
+@mixin x-rgba-l ($property, $list) {
+    $r: nth($list, 1);
+    $g: nth($list, 2);
+    $b: nth($list, 3);
+    $a: nth($list, 4);
+    #{$property}: rgb($r, $g, $b);
+    #{$property}: rgba($r, $g, $b, $a);
+}
+
+@function strip-unit ($num) {
   @return $num / ($num * 0 + 1);
 }
 
-@mixin x-rem($property, $values...) {
+@mixin x-rem ($property, $values...) {
   $max: length($values);
   $pxValues: '';
   $remValues: '';

@@ -27,7 +27,7 @@
             @include x-rem(font-size, 5);
             line-height: 1;
             text-align: center;
-            color: #fefefe;
+            color: $text-color-primary;
             text-shadow: 1px 1px 0 #000;
             margin-top: -40px;
             font-weight: 400;
@@ -59,6 +59,10 @@
     }
 }
 
+html.ie6,
+html.ie7,
+html.ie8,
+html.no-js,
 html.no-video.no-flash,
 html.no-videojs,
 html.touch {
@@ -74,19 +78,18 @@ html.touch {
             @include srcset('../media/DSC_2725_', '.jpg');
             background-position: center center;
             @include media($mobile) {
-                background-position: 40% center;
+                background-position: center 40%;
             }
         }
         &--tech {
             @include srcset('../media/DSC_2760_', '.jpg');
-            background-position: 60% center;
+            background-position:center 60% ;
         }
         &--details {
             background: #111;
         }
     }
 }
-
 html.touch {
     .slide {
         background-attachment: scroll;

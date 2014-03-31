@@ -1,6 +1,15 @@
 /* _nav.scss */
 
-.head-nav {
+$headNav: '.head-nav';
+
+$headNav-bgcolor-transparent:         (0, 0, 0, 0.6);
+$headNav-bgcolor-solid:               #000;
+
+$headNav-height-full:                 45px;
+$headNav-height-compressed:           39px;
+
+
+#{$headNav} {
     position:absolute;
     z-index:200;
     top: 0;
@@ -23,11 +32,11 @@
 
     &.detached {
         position: fixed;
-        background: rgba(0,0,0,0.6);
-        -webkit-transition: -webkit-transform .3s,background .1s;
-        -moz-transition: -moz-transform .3s,background .1s;
-        -o-transition: -o-transform .3s,background .1s;
-        transition: transform .3s,background .1s;
+        @include x-rgba-l (background, $headNav-bgcolor-transparent);
+        -webkit-transition: -webkit-transform .3s,background .3s;
+        -moz-transition: -moz-transform .3s,background .3s;
+        -o-transition: -o-transform .3s,background .3s;
+        transition: transform .3s,background .3s;
     }
 
     &.hidden {
@@ -37,10 +46,10 @@
         -ms-transform: translate(0,-60px);
         -o-transform: translate(0,-60px);
         transform: translate(0,-60px);
-        -webkit-transition: -webkit-transform .2s,background .3s,color .3s,opacity .3s;
-        -moz-transition: -moz-transform .2s,background .3s,color .3s,opacity .3s;
-        -o-transition: -o-transform .2s,background .3s,color .3s,opacity .3s;
-        transition: transform .2s,background .3s,color .3s,opacity .3s;
+        -webkit-transition: -webkit-transform .3s,background .3s,color .3s,opacity .3s;
+        -moz-transition: -moz-transform .3s,background .3s,color .3s,opacity .3s;
+        -o-transition: -o-transform .3s,background .3s,color .3s,opacity .3s;
+        transition: transform .3s,background .3s,color .3s,opacity .3s;
     }
     &.visible {
         opacity: 1;
@@ -49,22 +58,22 @@
         -ms-transform: translate(0,0);
         -o-transform: translate(0,0);
         transform: translate(0,0);
-        -webkit-transition: -webkit-transform .2s,background .3s;
-        -moz-transition: -moz-transform .2s,background .3s;
-        -o-transition: -o-transform .2s,background .3s;
-        transition: transform .2s,background .3s;
+        -webkit-transition: -webkit-transform .3s,background .3s;
+        -moz-transition: -moz-transform .3s,background .3s;
+        -o-transition: -o-transform .3s,background .3s;
+        transition: transform .3s,background .3s;
     }
     &__nav {
         @include outer-container;
         padding:0 20px;
         @include x-rem(font-size, 1.25);
         vertical-align: top;
-        line-height:45px;
+        line-height: $headNav-height-full;
         &, a {
            font-weight:300;
         }
         @include media ($mobile-wide) {
-            line-height:39px;
+            line-height:$headNav-height-compressed;
         }
     }
 
@@ -95,15 +104,15 @@
         position:absolute;
         list-style:none;
         margin:0;
-        top:45px;
+        top: $headNav-height-full;
         max-height: 0;
         right:0;
         overflow: hidden;
         transition: max-height .2s linear;
-        background: #000;
-        @include x-rem(font-size, 1);
+        background: $headNav-bgcolor-solid;
+        @include x-rem (font-size, 1);
         @include media ($mobile-wide) {
-            top:41px;
+            top: $headNav-height-compressed + 2px;
         }
         a {
             white-space: nowrap;
@@ -113,7 +122,6 @@
         li {
             min-width:140px;
             padding: 0 15px;
-            background:none;
             transition:background 0.2s linear;
             &:hover {
                 background:none;
@@ -131,7 +139,7 @@
     &__menu-icon {
         font-family: Helvetica, Arial, sans-serif;
         @include x-rem(font-size, 2);
-        line-height:45px;
+        line-height: $headNav-height-full;
         vertical-align: middle;
         display:inline-block;
         margin-top: -2px;
@@ -139,16 +147,54 @@
         right:auto;
     }
 
+    &__cta-arrow {
+        .main-header {
+          background: url(logo.svg) no-repeat top center;
+       }
+        .no-svg .main-header {
+          background-image: url(logo.png);
+        }
+    }
 }
-.head-nav.dark {
-    background: #000;
+
+
+
+#{$headNav}.dark {
+    background: $headNav-bgcolor-solid;
     overflow:visible;
 }
 
-html.no-touch {
-    .head-nav:hover {
-        background: #000;
+html.ie6,
+html.ie7,
+html.ie8,
+html.no-js {
+    #{$headNav} {
+        -webkit-transition: -webkit-transform .3s .3s,background .3s;
+        -moz-transition: -moz-transform .3s .3s,background .3s;
+        -o-transition: -o-transform .3s .3s,background .3s;
+        transition: transform .3s .3s,background .3s;
+        @include x-rgba-l (background, $headNav-bgcolor-transparent);
+        &__menu-list {
+            @include x-rgba-l (background, $headNav-bgcolor-transparent);
+        }
+        &:hover {
+            background: $headNav-bgcolor-solid;
+            #{$headNav}__menu-list {
+                background: $headNav-bgcolor-solid;
+                display: block;
+                max-height: 300px;
+            }
+        }
+        &__menu-toggle:not(:checked) + &__menu-list,
+        &__menu-toggle:checked + &__menu-list {
+            display: block;
+            max-height: 300px;
+        }
     }
-
 }
 
+html.no-touch {
+    #{$headNav}:hover {
+        background: $headNav-bgcolor-solid;
+    }
+}
