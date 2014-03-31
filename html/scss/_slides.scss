@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* _slides.scss */
 
 @mixin slide {
@@ -18,6 +19,23 @@
     @include slide;
     &--title {
         @include fixedslide;
+        .cta-scroll {
+            position: absolute;
+            top: 60%;
+            left:0;
+            right:0;
+            z-index: 10;
+            line-height: 1;
+            @include x-rem(font-size, 1.1);
+            margin-top: 80px;
+            text-align: center;
+            @include media($mobile) {
+                margin-top: 20px;
+            }
+            @include media($mobile-wide-only) {
+                margin-top: 40px;
+            }
+        }
         .tagline {
             position: absolute;
             top: 50%;
@@ -29,7 +47,6 @@
             text-align: center;
             color: $text-color-primary;
             text-shadow: 1px 1px 0 #000;
-            margin-top: -40px;
             font-weight: 400;
 
             @include media($mobile) {

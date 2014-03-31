@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* _nav.scss */
 
 $headNav: '.head-nav';
@@ -7,6 +8,77 @@ $headNav-bgcolor-solid:               #000;
 
 $headNav-height-full:                 45px;
 $headNav-height-compressed:           39px;
+
+.cta-menu {
+    @include outer-container;
+    position:fixed;
+    top:15px;
+    right:0;
+    left:0;
+    z-index:199;
+    text-align:right;
+    width:100%;
+    padding-right:60px;
+    opacity: 0;
+    @include media($mobile-wide) {
+        opacity:1;
+    }
+    -webkit-transform: translate(0,-60px);
+    -moz-transform: translate(0,-60px);
+    -ms-transform: translate(0,-60px);
+    -o-transform: translate(0,-60px);
+    transform: translate(0,-60px);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor:pointer;
+
+    @include media($mobile-wide) {
+        padding-right:15px;
+        display:block;
+        opacity:0.5;
+        width:auto;
+    }
+}
+
+#{$headNav} {
+    &.hidden + .cta-menu {
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+        @include media($mobile-wide) {
+            -webkit-transition: -webkit-transform .3s,background .3s,opacity 15s;
+            -moz-transition: -moz-transform .3s,background .3s,opacity 15s;
+            -o-transition: -o-transform .3s,background .3s,opacity 15s;
+            transition: transform .3s,background .3s,opacity 15s;
+            opacity: 0.3;
+        }
+        -webkit-transition: -webkit-transform .3s,background .3s,opacity .3s;
+        -moz-transition: -moz-transform .3s,background .3s,opacity .3s;
+        -o-transition: -o-transform .3s,background .3s,opacity .3s;
+        transition: transform .3s,background .3s,opacity .3s;
+        opacity: 1;
+    }
+    &.visible + .cta-menu {
+        -webkit-transform: translate(0,-60px);
+        -moz-transform: translate(0,-60px);
+        -ms-transform: translate(0,-60px);
+        -o-transform: translate(0,-60px);
+        transform: translate(0,-60px);
+        -webkit-transition: -webkit-transform .3s,background .3s,color .3s,opacity .3s;
+        -moz-transition: -moz-transform .3s,background .3s,color .3s,opacity .3s;
+        -o-transition: -o-transform .3s,background .3s,color .3s,opacity .3s;
+        transition: transform .3s,background .3s,color .3s,opacity .3s;
+        opacity: 0;
+        @include media($mobile-wide) {
+            opacity:1;
+        }
+    }
+}
 
 
 #{$headNav} {
@@ -65,7 +137,6 @@ $headNav-height-compressed:           39px;
     }
     &__nav {
         @include outer-container;
-        padding:0 20px;
         @include x-rem(font-size, 1.25);
         vertical-align: top;
         line-height: $headNav-height-full;
@@ -80,6 +151,7 @@ $headNav-height-compressed:           39px;
 
     &__logo {
         float:left;
+        margin-left:15px;
     }
 
     &__menu {

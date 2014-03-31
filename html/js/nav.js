@@ -98,4 +98,10 @@ $(document).ready(function () {
             $headNav.removeClass('dark');
         }
     });
+
+    // Menu CTA
+    $('.cta-menu').click(function (e) {
+        e.preventDefault();
+        navVisible(true);
+    });
 });
