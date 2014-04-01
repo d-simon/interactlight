@@ -1,15 +1,26 @@
 @charset "UTF-8";
 $text-color-primary: #fff;
 
-$mobile: new-breakpoint(max-width 479px 6);
-$mobile-wide: new-breakpoint(max-width 767px 6);
-$mobile-wide-only: new-breakpoint(min-width 480px max-width 767px 6);
-$tablet: new-breakpoint(max-width 959px 12);
-$tablet-only: new-breakpoint(min-width 768px max-width 959px 12);
-$desktop: new-breakpoint(max-width 1140px 12);
-$desktop-only: new-breakpoint(min-width 960px max-width 1140px 12);
-$full: new-breakpoint(min-width 1141px 12);
+// Breakpoints
+$w-mobile: 479px;
+$w-mobile-l: 767px;
+$w-tablet: 959px;
+$w-desktop: 1140px;
 
+$mobile: new-breakpoint(max-width $w-mobile 6);
+$mobile-wide: new-breakpoint(max-width $w-mobile-l 6);
+$tablet: new-breakpoint(max-width $w-tablet 12);
+$desktop: new-breakpoint(max-width $w-desktop 12);
+$full: new-breakpoint(min-width $w-desktop+1 12);
+
+$mobile-wide-only: new-breakpoint(min-width $w-mobile+1px max-width $w-mobile-l 6);
+$tablet-only: new-breakpoint(min-width $w-mobile-l+1px max-width $w-tablet 12);
+$desktop-only: new-breakpoint(min-width $w-tablet+1px max-width $w-desktop 12);
+
+$tablet-desktop-only: new-breakpoint(min-width $w-mobile-l+1px max-width $w-desktop 12);
+
+$tablet-and-up: new-breakpoint(min-width $w-mobile-l+1px);
+$desktop-and-up: new-breakpoint(min-width $w-tablet+1px 12);
 
 @mixin srcset ($prefix, $suffix) {
     @include media($mobile) {
@@ -18,7 +29,7 @@ $full: new-breakpoint(min-width 1141px 12);
     @include media($mobile-wide-only) {
         background-image: url($prefix + 'medium' + $suffix);
     }
-    @include media($tablet-only, $desktop-only) {
+    @include media($tablet-desktop-only) {
         background-image: url($prefix + 'large' + $suffix);
     }
     @include media($full) {
@@ -41,32 +52,32 @@ $full: new-breakpoint(min-width 1141px 12);
 }
 
 @function strip-unit ($num) {
-  @return $num / ($num * 0 + 1);
+    @return $num / ($num * 0 + 1);
 }
 
 @mixin x-rem ($property, $values...) {
-  $max: length($values);
-  $pxValues: '';
-  $remValues: '';
+    $max: length($values);
+    $pxValues: '';
+    $remValues: '';
 
-  @for $i from 1 through $max {
-    $value: strip-unit(nth($values, $i));
-    $pxValues: #{$pxValues + $value*16}px;
+    @for $i from 1 through $max {
+        $value: strip-unit(nth($values, $i));
+        $pxValues: #{$pxValues + $value*16}px;
 
-    @if $i < $max {
-      $pxValues: #{$pxValues + " "};
+        @if $i < $max {
+            $pxValues: #{$pxValues + " "};
+        }
     }
-  }
 
-  @for $i from 1 through $max {
-    $value: strip-unit(nth($values, $i));
-    $remValues: #{$remValues + $value}rem;
+    @for $i from 1 through $max {
+        $value: strip-unit(nth($values, $i));
+        $remValues: #{$remValues + $value}rem;
 
-    @if $i < $max {
-      $remValues: #{$remValues + " "};
+        @if $i < $max {
+            $remValues: #{$remValues + " "};
+        }
     }
-  }
 
-  #{$property}: $pxValues;
-  #{$property}: $remValues;
+    #{$property}: $pxValues;
+    #{$property}: $remValues;
 }

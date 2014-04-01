@@ -12,13 +12,13 @@ $headNav-height-compressed:           39px;
 .cta-menu {
     @include outer-container;
     position:fixed;
-    top:15px;
+    top:10px;
     right:0;
     left:0;
     z-index:199;
     text-align:right;
     width:100%;
-    padding-right:60px;
+    padding-right:40px;
     opacity: 0;
     @include media($mobile-wide) {
         opacity:1;
@@ -35,8 +35,11 @@ $headNav-height-compressed:           39px;
     user-select: none;
     cursor:pointer;
 
-    @include media($mobile-wide) {
+    @include media($tablet) {
         padding-right:15px;
+        top:15px;
+    }
+    @include media($mobile-wide) {
         display:block;
         opacity:0.5;
         width:auto;

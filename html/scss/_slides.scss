@@ -84,6 +84,9 @@
 .no-videojs,
 .touch {
     .slide {
+        &--details {
+            background: #111;
+        }
         &--home {
             @include srcset('../media/DSC_2710_', '.jpg');
         }
@@ -101,9 +104,6 @@
         &--tech {
             @include srcset('../media/DSC_2760_', '.jpg');
             background-position:center 60% ;
-        }
-        &--details {
-            background: #111;
         }
     }
 }
