@@ -47,6 +47,14 @@ p {
     }
 }
 
+i {
+    font-style: italic;
+}
+
+i.bold {
+    font-weight:bold;
+}
+
 a:hover {
     text-decoration: underline;
 }
