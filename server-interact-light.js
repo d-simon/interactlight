@@ -1,11 +1,23 @@
 var pixelScreen = require('./screen-36x24.js')
-  , WorldMap = require('./interactlight/worldmap.js')
+  , util = require('./interactlight/util.js')
+  , i2p = require('image2pixels')
+  , fs = require('fs')
+  , deepcopy = require('deepcopy')
   , coordinates = require('./interactlight/coordinates.js')
   , config = require('./config.js')
   , twitter = require('ntwitter')
+  , twit = new twitter({
+        consumer_key: config.twitter.consumer_key,
+        consumer_secret: config.twitter.consumer_secret,
+        access_token_key: config.twitter.access_token_key,
+        access_token_secret: config.twitter.access_token_secret
+    })
   , Images = require('./interactlight/images.js')
   , Sound = require('./interactlight/sound.js')
-  , server = require('./interactlight/server.js');
+  , server = require('./interactlight/server.js')
+  , WorldMap = require('./interactlight/worldmap.js')(pixelScreen, fs, config, twit)
+  , LoopPlayer = require('./loops/loop-player.js')(pixelScreen, util, i2p, deepcopy, config.video.files);
+
 
 var images = new Images(pixelScreen, {
     'black':     './media/36x24_black.png',
@@ -20,27 +32,26 @@ var images = new Images(pixelScreen, {
     'world':    './media/cities_36x24_world.png'
 });
 
+
 var sound, sound2;
 if (config.midi.enable === true) {
     sound = new Sound({ 'midiPort': config.midi.ports[0] });
     sound2 = new Sound({ 'midiPort': config.midi.ports[1] });
 }
 
-var twit = new twitter({
-        consumer_key: config.twitter.consumer_key,
-        consumer_secret: config.twitter.consumer_secret,
-        access_token_key: config.twitter.access_token_key,
-        access_token_secret: config.twitter.access_token_secret
-    });
-
 var worldMap = new WorldMap();
+var loopPlayer = new LoopPlayer();
 
 // Start Image
 images.showImage('tweet_bw');
 
 // Input Stream
+
 twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'none'}, function (stream) {
     stream.on('data', streamCallback);
+    stream.on('error', function(error, code) {
+        console.log("Twitter Stream: " + error + ": " + code);
+    });
 });
 
 // Input Stream
@@ -73,7 +84,9 @@ function getCoordsStr (str) {
 }
 
 function resetState () {
+    console.log(worldMap.running, loopPlayer.running);
     worldMap.stop();
+    loopPlayer.stop();
     images.showImageSafe('black');
 }
 
@@ -109,6 +122,13 @@ function streamCallback (data) {
         server.io.sockets.emit('cmd', 'white');
         resetState();
         images.showImageSafe('tweet_wb');
+
+    // Black
+    } else if (has('loop')) {
+        console.log('cmd: loop');
+        server.io.sockets.emit('cmd', 'loop');
+        resetState();
+        loopPlayer.play('0');
 
     // // Color
     // } else if (has('color') || has('colour')) {
@@ -151,6 +171,10 @@ function streamCallback (data) {
                         }
 
                         server.io.sockets.emit('tweet-stream', data);
+                    },
+                    function errorCallback (err) {
+                        if (err) return console.log(err);
+                        streamCallback({text: 'white'});
                     });
                 });
             }, 4000);

@@ -1,8 +1,7 @@
 var pixelScreen = require('../screen-36x24.js');
-
 var util = require('../interactlight/util.js');
-
 var i2p = require('image2pixels');
+var deepcopy = require('deepcopy');
 
 var fileConfig = {
     '1': { prefix: './loop/loop', suffix: '.png', counterLength: 6, start: 1, end: 1128, fps: 24 },
@@ -17,21 +16,48 @@ var fileConfig = {
     '10': { prefix: './loop10/loop10', suffix: '.png', counterLength: 6, start: 1, end: 898, fps: 24 }
 };
 
-var current = (process.argv[2] && fileConfig[process.argv[2]]) ? fileConfig[process.argv[2]] : fileConfig['1']
-  , files = []
-  , loopCount = 0;
-for (var i = current.start; i <= current.end; i++) {
-    files.push(current.prefix + util.padString(i,6) + current.suffix);
+
+// Load and Cache pixelimages
+
+var current = (process.argv[2] && fileConfig[process.argv[2]]) ? fileConfig[process.argv[2]] : fileConfig['1'];
+
+var loopCount = 0;
+
+current.files = [];
+current.images = [];
+
+for (var i = 0; i < current.end - current.start; i++) {
+    current.files[i] = current.prefix + util.padString(i+current.start,6) + current.suffix;
 }
 
-setInterval(function () {
-    var filename = files[loopCount];
-    i2p(filename, { pixelsCallback: util.convertI2PtoPixelScreen }, function (err, pixels) {
-        pixelScreen.update(pixels);
-    });
-    loopCount++;
-    if (loopCount > current.end - current.start) loopCount = 0;
-},1000/current.fps);
+console.log('Loading...');
+iterateAsync(0, current.files.length,
+    function (i, callback) {
+        var filename = current.files[i];
+        i2p(filename, { pixelsCallback: util.convertI2PtoPixelScreen }, function (err, pixels) {
+            current.images[i] = deepcopy(pixels);
+            if (callback && typeof callback == 'function') callback();
+        });
+    },
+    function cb () {
+        console.log('Done!')
+        setInterval(function () {
+            pixelScreen.update(current.images[loopCount]);
+            loopCount++;
+            if (loopCount >= current.end - current.start) loopCount = 0;
+        },1000/current.fps);
+    }
+);
 
+
+function iterateAsync (i, length, func, callback) {
+    if (i < length ) {
+        func(i, function cb () {
+            iterateAsync(i+1, length, func, callback);
+        });
+    } else {
+        if (callback && typeof callback === 'function') callback();
+    }
+}
 
 module.exports = pixelScreen;
