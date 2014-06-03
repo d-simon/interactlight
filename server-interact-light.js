@@ -5,6 +5,7 @@ var pixelScreen = require('./screen-36x24.js')
   , deepcopy = require('deepcopy')
   , coordinates = require('./interactlight/coordinates.js')
   , config = require('./config.js')
+  , midi = require('midi')
   , twitter = require('ntwitter')
   , twit = new twitter({
         consumer_key: config.twitter.consumer_key,
@@ -13,10 +14,10 @@ var pixelScreen = require('./screen-36x24.js')
         access_token_secret: config.twitter.access_token_secret
     })
   , Images = require('./interactlight/images.js')
-  , Sound = require('./interactlight/sound.js')
+  , Sound = require('./interactlight/sound.js')(midi)
   , server = require('./interactlight/server.js')
   , WorldMap = require('./interactlight/worldmap.js')(pixelScreen, fs, config, twit)
-  , LoopPlayer = require('./loops/loop-player.js')(pixelScreen, util, i2p, deepcopy, config.video.files);
+  , LoopPlayer = require('./interactlight/loop-player.js')(pixelScreen, util, i2p, deepcopy, config.video.files);
 
 
 var images = new Images(pixelScreen, {
@@ -44,7 +45,7 @@ var loopPlayer = new LoopPlayer();
 
 // Start Image
 images.showImage('tweet_bw');
-
+streamCallback({text: 'loop'});
 // Input Stream
 
 twit.stream('statuses/filter', { follow: config.twitter.userId, filter_level:'none'}, function (stream) {
@@ -125,6 +126,7 @@ function streamCallback (data) {
 
     // Black
     } else if (has('loop')) {
+        var cmd = '0';
         console.log('cmd: loop');
         server.io.sockets.emit('cmd', 'loop');
         resetState();

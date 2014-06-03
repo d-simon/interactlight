@@ -5,7 +5,7 @@ var screenHeight = pixelScreen.height / 2;
 
 var keypress = require('keypress')
   , Snake = require('./lib/snake')
-  , snake = new Snake(screenWidth, screenHeight, 220);
+  , snake = new Snake(screenWidth, screenHeight, 120);
 
 // make `process.stdin` begin emitting "keypress" events
 keypress(process.stdin);
