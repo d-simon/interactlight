@@ -38,18 +38,18 @@ $(document).ready(function () {
             changeVideo('media/DSC_2756');
         }, { offset: '-100%' });
 
-        $('.slide--snake').waypoint(function () {
-            changeVideo('media/DSC_2725');
+        $('.slide--tech').waypoint(function () {
+            changeVideo('media/DSC_2760_dark');
         }, { offset: '100%' });
-        $('.slide--snake').waypoint(function () {
-            changeVideo('media/DSC_2725');
+        $('.slide--tech').waypoint(function () {
+            changeVideo('media/DSC_2760_dark');
         }, { offset: '-100%' });
 
-        $('.slide--tech').waypoint(function () {
-            changeVideo('media/DSC_2760_dark');
+        $('.slide--snake').waypoint(function () {
+            changeVideo('media/DSC_2725');
         }, { offset: '100%' });
-        $('.slide--tech').waypoint(function () {
-            changeVideo('media/DSC_2760_dark');
+        $('.slide--snake').waypoint(function () {
+            changeVideo('media/DSC_2725');
         }, { offset: '-100%' });
 
     } else {
