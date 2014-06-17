@@ -29,4 +29,16 @@
             margin-left: 5%;
         }
     }
+    &__icons {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        width: 200px;
+        height: 200px;
+    }
+    &__node {
+        background-image: url(../media/icons/nodejs-icon-white.svg);
+    }
+    &__twitter {
+        background-image: url(../media/icons/twitter-icon-white.svg);
+    }
 }
