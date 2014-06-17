@@ -1,6 +1,32 @@
 //.diagram {}
 .techbox {
-    margin-bottom: 10px;
+    position:relative;
+    &:after {
+        content:"";
+        display: block;
+        position: absolute;
+        top:0;
+        left:50%;
+        width:1px;
+        height:100%;
+        background:rgba(255,255,255,0.4);
+    }
+    &:first-child{
+        &:after {
+            top:70%;
+            height:30%;
+        }
+    }
+    &--bottompad {
+        padding-bottom:80px;
+    }
+    &__description {
+        &--centered {
+            p {
+                text-align: center;
+            }
+        }
+    }
     &__title {
             text-align: center;
         h4 {

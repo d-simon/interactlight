@@ -54,7 +54,7 @@
             <div class="content">
                 <h3 class="content__main-title">Introduction</h3>
                 <div class="content__text">
-                    <p class="no-margin-bottom"><a href="https://twitter.com/InteractLight"><b>@InteractLight</b></a> is an interactive light-installation that makes use of a multitude of input and output channels. It is also an encouraging plattform for experiments. A wide range of sources for input data are available, for example twitter streams, MIDI, web interfaces or a conventional keyboard. Core elements on the output side are the custom <b>handmade modular LED-Pixel-Screens</b>, audio signals and a website.</p>
+                    <p class="no-margin-bottom"><a href="https://twitter.com/InteractLight" target="_blank"><b>@InteractLight</b></a> is an interactive light-installation that makes use of a multitude of input and output channels. It is also an encouraging plattform for experiments. A wide range of sources for input data are available, for example twitter streams, MIDI, web interfaces or a conventional keyboard. Core elements on the output side are the custom <b>handmade modular LED-Pixel-Screens</b>, audio signals and a website.</p>
                 </div>
                 <div class="content__image">
                     <img src="media/images/med_landscape/interactlight_01.jpg" alt="">
@@ -90,21 +90,17 @@
                 <h3 class="content__main-title">Technical Details</h3>
                 <div class="diagram">
                     <div class="techbox">
-                        <div class="techbox__description">
-                            <div class="techbox__half">
-                                <div class="techbox__title">
-                                    <h4>User Action <i class="ion-android-arrow-down-left"></i></h4>
-                                </div>
-                            </div>
-                            <div class="techbox__half techbox__half--last">
-                                <p>A simple user action triggers the installation. For example a <b>tweet</b>.</p>
-                            </div>
+                        <div class="techbox__title">
+                            <h4>User Action</h4>
+                        </div>
+                        <div class="techbox__description techbox__description--centered">
+                            <p>A simple user action triggers the installation. For example a <b>tweet</b>.</p>
                         </div>
                     </div>
-                    <div class="techbox">
+                    <div class="techbox techbox--bottompad">
                         <div class="techbox__description">
                             <div class="techbox__half">
-                                <p>Since @InteractLight establishes a connection to the <a href="https://dev.twitter.com/docs/api/streaming"><b>Twitter Streaming API</b></a> it is able to read out the commands that are tweeted to its account. Under the hood the data is processed by a <a href="http://www.nodejs.org"><b>NodeJS</b></a> application which takes care of computational tasks and routing inputs and outputs.
+                                <p>Since @InteractLight establishes a connection to the <a href="https://dev.twitter.com/docs/api/streaming" target="_blank"><b>Twitter Streaming API</b></a> it is able to read out the commands that are tweeted to its account. Under the hood the data is processed by a <a href="http://www.nodejs.org" target="_blank"><b>NodeJS</b></a> application which takes care of computational tasks and routing inputs and outputs.
                                 </p>
                             </div>
                             <div class="techbox__half techbox__icons techbox__twitter">
@@ -121,10 +117,9 @@
                             <div class="techbox__title"><h4>NodeJS</h4></div>
                         </div>
                         <div class="techbox__description">
-                            <div class="techbox__half">
-                                <p>The application sends <a href="http://en.wikipedia.org/wiki/DMX512"><b>DMX</b></a> signals over the <a href="http://en.wikipedia.org/wiki/Art-Net"><b>ArtNet</b></a> protocol to a device called <a href="https://openmediacontroller.com"><b>Open Media Controller (OMC)</b></a>. Since the OMC has both DMX and ArtNet protocols implemented NodeJS can easily address channels and send data. (The Arduino compatible controller was developed by <a href="http://iart.ch"><b>iArt</b></a> from Basel, Switzerland.). Thanks to NodeJS’ lively module eco-system it is a piece of cake to output <a href="http://en.wikipedia.org/wiki/Midi"><b>MIDI</b></a> data as well. In our experiments we challenged ourselves by mapping the data stream to a C major key according to the timezone.</p>
-                                <p>Another approach was to produce a natural appearing audio feedback in the form of bird noise. This was achieved by creating a custom Instrument with the <a href="http://www.apple.com/logic-pro/plugins-and-sounds/"><b>EXS24 Sampler</b></a> in Apple Logic Pro X.
-                                <br>Tell me about it! aliquiatur sus, qui aut por saessed milla deles de velecest verumquo quia apis mi, il modist as aligenisc. Eptatiscium ad maio. Et fugiat qui volorunt vellesequi rest harum non repelen ditiam sunt laciisciae dionsequisit odi solorib
+                            <div class="techbox__half techbox__half--last">
+                                <p>The application sends <a href="http://en.wikipedia.org/wiki/DMX512" target="_blank"><b>DMX</b></a> signals over the <a href="http://en.wikipedia.org/wiki/Art-Net" target="_blank"><b>ArtNet Protocol</b></a> to a device called <a href="https://openmediacontroller.com" target="_blank"><b>Open Media Controller (OMC)</b></a>. Since the OMC has both DMX and ArtNet protocols implemented NodeJS can easily address channels and send data. (The Arduino compatible controller was developed by <a href="http://iart.ch" target="_blank"><b>iArt</b></a> from Basel, Switzerland.).</p>
+                                <p> Thanks to NodeJS’ <a href="http://npmjs.org" target="_blank">lively module eco-system</a> it is a piece of cake to output <a href="http://en.wikipedia.org/wiki/Midi" target="_blank"><b>MIDI</b></a> data as well. In our experiments we challenged ourselves by mapping the data stream to a C major key according to the timezone. Another approach we investigated was to produce a natural appearing audio feedback in the form of bird noise. This was achieved by creating a custom Instrument with the <a href="http://www.apple.com/logic-pro/plugins-and-sounds/" target="_blank"><b>EXS24 Sampler</b></a> in Apple Logic Pro X.
                                 </p>
                             </div>
                         </div>
