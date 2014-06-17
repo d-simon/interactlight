@@ -55,16 +55,26 @@
             margin-left: 5%;
         }
     }
-    &__icons {
+    &__logo {
         background-size: 100% auto;
         background-repeat: no-repeat;
         width: 200px;
         height: 200px;
+        margin: 0 auto;
     }
     &__node {
         background-image: url(../media/icons/nodejs-icon-white.svg);
     }
     &__twitter {
         background-image: url(../media/icons/twitter-icon-white.svg);
+    }
+    &__frame {
+        &--split {
+            width:66%;
+            margin:auto;
+            height:30px;
+            border:1px solid rgba(255,255,255,0.4);
+            border-bottom:0;
+        }
     }
 }
