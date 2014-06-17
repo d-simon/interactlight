@@ -15,6 +15,8 @@
     "h5bp-console-polyfill": "~0.0.2",
     "jquery-waypoints": "~2.0.4",
     "respond": "~1.4.2",
-    "fastclick": "~1.0.0"
+    "fastclick": "~1.0.0",
+    "video.js": "~4.6.3",
+    "viewport-units-buggyfill": "~0.3.1"
   }
 }
