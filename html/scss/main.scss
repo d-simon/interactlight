@@ -57,7 +57,17 @@ body {
     }
     &__text {
         max-width: 600px;
-        margin: 15px auto;
+        margin: 15px auto 0;
         padding: 10px;
+        &:last-child {
+            margin: 15px auto;
+        }
+        p.no-margin-bottom {
+            margin-bottom:25px;
+        }
+    }
+    &__image {
+        margin: 0 auto;
+        max-width: 900px;
     }
 }
