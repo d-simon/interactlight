@@ -10,6 +10,7 @@ $max-width: 1140px;
 @import "_typo";
 @import "_nav";
 @import "_slides";
+@import "_diagram";
 
 /* main.scss */
 
@@ -26,6 +27,9 @@ body {
     background:#000;
 }
 
+div {
+  @include clearfix;
+}
 
 .main {
     position:relative;

@@ -18,6 +18,7 @@
 
     <title>InteractLight</title>
     <link rel="stylesheet" type="text/css" data-remove="exclude" href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400,300,500,500italic'>
+    <link rel="stylesheet" type="text/css" href="components/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
     <script src="components/modernizr/modernizr.js"></script>
@@ -87,31 +88,56 @@
         <section class="slide slide--details slide--tech-details js-minHeight">
             <div class="content">
                 <h3 class="content__main-title">Technical Details</h3>
-                <div class="content__text">
-                    <div class="tech-box">User Action</div>
-                    <p class="tech-info-text">A simple user action triggers the installation. For example a <b>tweet</b>.</p>
+                <div class="diagram">
+                    <div class="techbox">
+                        <div class="techbox__description">
+                            <div class="techbox__half">
+                                <div class="techbox__title">
+                                    <h4>User Action <i class="ion-android-arrow-down-left"></i></h4>
+                                </div>
+                            </div>
+                            <div class="techbox__half techbox__half--last">
+                                <p>A simple user action triggers the installation. For example a <b>tweet</b>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="techbox">
+                        <div class="techbox__description">
+                            <div class="techbox__half">
+                                <p>Since @InteractLight establishes a connection to the <a href="https://dev.twitter.com/docs/api/streaming"><b>Twitter Streaming API</b></a> it is able to read out the commands that are tweeted to its account. Under the hood the data is processed by a <a href="http://www.nodejs.org"><b>NodeJS</b></a> application which takes care of computational tasks and routing inputs and outputs.
+                                </p>
+                            </div>
+                            <div class="techbox__half techbox__half--last">
+                                <div class="techbox__title"><h4>Twitter</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="techbox">
+                        <div class="techbox__half techbox__half--last">
+                            <div class="techbox__title"><h4>NodeJS</h4></div>
+                        </div>
+                        <div class="techbox__description">
+                            <div class="techbox__half">
+                                <p>The application sends <a href="http://en.wikipedia.org/wiki/DMX512"><b>DMX</b></a> signals over the <a href="http://en.wikipedia.org/wiki/Art-Net"><b>ArtNet</b></a> protocol to a device called <a href="https://openmediacontroller.com"><b>Open Media Controller (OMC)</b></a>. Since the OMC has both DMX and ArtNet protocols implemented NodeJS can easily address channels and send data. (The Arduino compatible controller was developed by <a href="http://iart.ch"><b>iArt</b></a> from Basel, Switzerland.). Thanks to NodeJS’ lively module eco-system it is a piece of cake to output <a href="http://en.wikipedia.org/wiki/Midi"><b>MIDI</b></a> data as well. In our experiments we challenged ourselves by mapping the data stream to a C major key according to the timezone.</p>
+                                <p>Another approach was to produce a natural appearing audio feedback in the form of bird noise. This was achieved by creating a custom Instrument with the <a href="http://www.apple.com/logic-pro/plugins-and-sounds/"><b>EXS24 Sampler</b></a> in Apple Logic Pro X.
+                                <br>Tell me about it! aliquiatur sus, qui aut por saessed milla deles de velecest verumquo quia apis mi, il modist as aligenisc. Eptatiscium ad maio. Et fugiat qui volorunt vellesequi rest harum non repelen ditiam sunt laciisciae dionsequisit odi solorib
+                                </p>
+                            </div>
+                        </div>
 
-                    <div class="tech-box">Twitter</div>
-                    <p class="tech-info-text">Since @InteractLight establishes a connection to the <a href="https://dev.twitter.com/docs/api/streaming"><b>Twitter Streaming API</b></a> it is able to read out the commands that are tweeted to its account. Under the hood the data is processed by a <a href="http://www.nodejs.org"><b>NodeJS</b></a> application which takes care of computational tasks and routing inputs and outputs.</p>
-
-                    <div class="tech-box">NodeJS</div>
-                    <p class="tech-info-text">The application sends <a href="http://en.wikipedia.org/wiki/DMX512"><b>DMX</b></a> signals over the <a href="http://en.wikipedia.org/wiki/Art-Net"><b>ArtNet</b></a> protocol to a device called <a href="https://openmediacontroller.com"><b>Open Media Controller (OMC)</b></a>. Since the OMC has both DMX and ArtNet protocols implemented NodeJS can easily address channels and send data. (The Arduino compatible controller was developed by <a href="http://iart.ch"><b>iArt</b></a> from Basel, Switzerland.)</p>
-
-                    <p class="tech-info-text">Thanks to NodeJS’ extensive add-on’s it’s a piece of cake to output some <a href="http://en.wikipedia.org/wiki/Midi"><b>MIDI</b></a> data as well. In our experiments we challenged ourselves by mapping the data stream to a C major key according to the timezone. Another approach was to produce a natural appearing audio feedback in the form of bird noise. This was achieved by creating a custom Instrument with the <a href="http://www.apple.com/logic-pro/plugins-and-sounds/"><b>EXS24 Sampler</b></a> in Apple Logic Pro X.</p>
-
-                    <p class="tech-info-text">Tell me about it! aliquiatur sus, qui aut por saessed milla deles de velecest verumquo quia apis mi, il modist as aligenisc. Eptatiscium ad maio. Et fugiat qui volorunt vellesequi rest harum non repelen ditiam sunt laciisciae dionsequisit odi solorib</p>
-
-                    <div class="tech-box">OMC</div>
-                    <p class="tech-info-text">The LED strips on the panels are connected to the spi port of the Open Media Controller.</p>
-                    <div class="tech-box">LED Screen</div>
-
-                    <div class="tech-box">Sampler</div>
-                    <p class="tech-info-text">To hear the sounds generated by the Sampler you‘re better off with a pair of speakers. ((Needs better wording…))</p>
-                    <div class="tech-box">Speakers</div>
-
-                    <div class="tech-box">Website</div>
-                    <p class="tech-info-text">Basically shows a website in fullscreen mode. Not much magic going on here.</p>
-                    <div class="tech-box">Beamer</div>
+                        <div class="techbox__third">
+                            <div class="techbox__title"><h4>OMController</h4></div><br><br>
+                            <div class="techbox__title"><h4>LED Screen</h4></div>
+                        </div>
+                        <div class="techbox__third">
+                            <div class="techbox__title"><h4>Sampler</h4></div><br><br>
+                            <div class="techbox__title"><h4>Speakers</h4></div>
+                        </div>
+                        <div class="techbox__third">
+                            <div class="techbox__title"><h4>Webinterface</h4></div><br><br>
+                            <div class="techbox__title"><h4>Beamer</h4></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -161,7 +187,7 @@
     <script src="components/jquery/dist/jquery.js"></script>
     <script src="components/jquery-waypoints/waypoints.js"></script>
     <script src="components/jquery-throttle-debounce/jquery.ba-throttle-debounce.js"></script>
-    <script src="components/video.js/video.js"></script>
+    <script src="components/video.js/dist/video-js/video.js"></script>
     <script src="components/BigVideo.js/lib/bigvideo.js"></script>
     <script src="js/main.js"></script>
     <script src="js/video.js"></script>

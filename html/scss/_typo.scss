@@ -4,7 +4,7 @@
 
 body {
     color:$text-color-primary;
-    font: 300 100%/1.5 'Open Sans', sans-serif;
+    font: 300 100%/1.5 $font-primary;
     -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape while allowing user zoom */
     -webkit-font-smoothing: antialiased;
 }
@@ -66,7 +66,7 @@ a,b,strong,dt {
 h1,h2,h3,h4,h5,h6 {
     font-weight: 300;
     color: $text-color-primary;
-    font-family: 'Miso', 'Open Sans', sans-serif;
+    font-family: $font-secondary;
 }
 
 h1 {
