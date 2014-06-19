@@ -82,6 +82,18 @@ module.exports = function(grunt) {
                     ],
                     dest: 'dist/'
                 }]
+            },
+            ionicons: {
+                files: [{
+                    expand: true,
+                    cwd: 'html/',
+                    src: [
+                        'components/ionicons/fonts/**',
+                        'components/ionicons/css/**'
+                    ],
+                    dest: 'dist/'
+                }]
+
             }
         },
         dom_munger: {
