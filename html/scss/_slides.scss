@@ -73,8 +73,10 @@
         @include fixedslide;
         background: #111119;
     }
-
-
+    &--final {
+        @include fixedslide;
+        background: #000;
+    }
 
     &--code {
        @include srcset('../media/images/srcset/interactlight_06_', '.jpg');
