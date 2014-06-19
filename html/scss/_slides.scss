@@ -10,7 +10,7 @@
 }
 
 @mixin fixedslide {
-    background-attachment: fixed;
+    //background-attachment: fixed;
     background-size: cover;
     overflow:hidden;
 }
@@ -73,7 +73,14 @@
         @include fixedslide;
         background: #111119;
     }
+
+
+
+    &--code {
+       @include srcset('../media/images/srcset/interactlight_06_', '.jpg');
+    }
 }
+
 
 .ie6,
 .ie7,
@@ -93,19 +100,21 @@
             @include srcset('../media/DSC_2756_', '.jpg');
             background-position: center center;
         }
-        &--snake {
+        &--tech {
+            @include srcset('../media/DSC_2760_', '.jpg');
+            background-position:center 60% ;
+        }
+        &--impressions {
             @include srcset('../media/DSC_2725_', '.jpg');
             background-position: center center;
             @include media($mobile) {
                 background-position: center 40%;
             }
         }
-        &--tech {
-            @include srcset('../media/DSC_2760_', '.jpg');
-            background-position:center 60% ;
-        }
     }
 }
+
+
 .touch {
     .slide {
         background-attachment: scroll;

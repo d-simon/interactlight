@@ -142,11 +142,12 @@
                 </div>
             </div>
         </section>
-        <section class="slide slide--title slide--snake js-fullHeight" id="impressions">
+        <section class="slide slide--title slide--impressions js-fullHeight" id="impressions">
             <h2 class="tagline">Impressions</h2>
         </section>
         <section class="slide slide--details js-minHeight" id="image-gallery">
             <div class="content">
+                <h3 class="content__main-title">Impressions &amp; Imagery</h3>
                 <img src="media/images/high_landscape/interactlight_01.jpg" alt="">
                 <p></p>
                 <img src="media/images/high_landscape/interactlight_02.jpg" alt="">
@@ -157,8 +158,8 @@
                 <p>@InteractLight set to video mode can play video files as well.</p>
                 <img src="media/images/high_landscape/interactlight_05.jpg" alt="">
                 <p>Development of the screen modules.</p>
-                <img src="media/images/high_landscape/interactlight_06.jpg" alt="">
-                <p>Long sessions of coding were inevitable to get the installation working.</p>
+               <!--  <img src="media/images/high_landscape/interactlight_06.jpg" alt="">
+                <p>Long sessions of coding were inevitable to get the installation working.</p> -->
                 <img src="media/images/high_landscape/interactlight_07.jpg" alt="">
                 <p>Simulation of the pixel screen on the computer.</p>
                 <img src="media/images/high_landscape/interactlight_08.jpg" alt="">
@@ -173,12 +174,50 @@
                 <p>Projections complement the installation and create a holistic experience.</p>
             </div>
         </section>
-        <section class="slide slide--title slide--snake js-fullHeight" id="code">
+        <section class="slide slide--title slide--code js-fullHeight" id="code">
             <h2 class="tagline">Code</h2>
         </section>
-        <section class="slide slide--details slide--game js-minHeight">
+        <section class="slide slide--details js-minHeight">
             <div class="content">
-                <h3 class="content__main-title">Code</h3>
+                <h3 class="content__main-title">Code of Interactlight</h3>
+                <div class="content__text">
+                    <p>Information about <b>dependencies, structure</b> and the <b>installation process</b> can be found on Github.</p>
+                    <h3 class="content__main-title"><a href="https://github.com/d-simon/node-pixelscreen" target="_blank">Interactlight on Github <i class="ion-social-github"></i></a></h3>
+                    <p>
+                    </p>
+                    <p></p>
+<!--                     <p>Note: The Interactlight Server runs on <a href="https://www.nodejs.org/" target="_blank">node.js</a> an has it's entry point as <a href="https://github.com/d-simon/interactlight/blob/master/server-interact-light.js" target="_blank"><i class="content__link--highlight ion-code-working"></i> server-interactlight.js</a><br></p> -->
+                </div>
+                <h3 class="content__main-title">Other Code</h3>
+                <div class="content__text">
+                    <p> During the process of creation – besides the actual installation code – <b>three open source modules</b> for node.js were created.
+                    </p>
+
+                    <br>
+                    <h3 class="content__sub-title"><b>node-pixelscreen</b> <a href="https://github.com/d-simon/node-pixelscreen" target="_blank"><i class="ion-social-github"></i></a> <a href="https://www.npmjs.org/package/pixelscreen" target="_blank"><i class="ion-ios7-bolt"></i></a></h3>
+                    <p>A plugin that allows to create <b>virtual pixelscreens</b> that <b>inhabit or partially inhabit</b> a bigger virtual pixelscreen. This allowed us to map each <b>physical module</b> onto a different part of our virtual <b>"main screen"</b>.
+                    <br>
+                    <br>This allows for a <b>multiple occupation</b> of the certain screen area, <b>overlapping</b> screens and (in the future) <b>rotated output</b>.
+                    </p>
+
+                    <br>
+                    <h3 class="content__sub-title"><b>node-terminal-pixelscreen</b> <a href="https://github.com/d-simon/node-terminal-pixelscreen" target="_blank"><i class="ion-social-github"></i></a> <a href="https://www.npmjs.org/package/terminal-pixelscreen" target="_blank"><i class="ion-ios7-bolt"></i></a></h3>
+                    <p>
+                    <img src="media/images/animated/node-terminal-pixelscreen2_optim.gif"><br>
+                    This module allowed us to <b>prototype</b> the screen <b>animations</b> and <b>verify image streams</b> without having to use the actual physical screen.<br><br>
+                    </p>
+
+                    <br>
+                    <h3 class="content__sub-title"><b>node-image2pixels</b> <a href="https://github.com/d-simon/node-image2pixels" target="_blank"><i class="ion-social-github"></i></a> <a href="https://www.npmjs.org/package/image2pixels" target="_blank"><i class="ion-ios7-bolt"></i></a></h3>
+                    <p><b>image2pixels</b> converts any image to a <b>three-dimensional pixel array</b>. (Height, Width, RGB). We also added a <b>conversion callback/hook</b>, so potentional filters can be hooked in between conversion and the final callback.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+        <section class="slide slide--details slide--final js-minHeight">
+            <h3 class="content__main-title">Other Code</h3>
+            <div class="content__text">
             </div>
         </section>
 

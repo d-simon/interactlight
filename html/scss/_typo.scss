@@ -37,7 +37,7 @@ p {
         width: 40px;
         height: 2px;
         margin:35px auto 31px;
-        background: #a00;
+        background: $text-color-secondary;
     }
     &:last-of-type {
         margin-bottom:85px;

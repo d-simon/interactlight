@@ -31,6 +31,11 @@ div {
   @include clearfix;
 }
 
+.verticalSpacer {
+    display: block;
+    height: 40px;
+}
+
 .main {
     position:relative;
     width:100%;
@@ -58,6 +63,14 @@ div {
         @include x-rem(margin-top, 4);
         @include x-rem(margin-bottom, 4);
         text-align: center;
+    }
+    &__sub-title {
+        @include x-rem(font-size, 3);
+    }
+    &__link {
+        &--highlight {
+            color:$text-color-highlight;
+        }
     }
     &__text {
         max-width: 600px;

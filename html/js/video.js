@@ -21,11 +21,15 @@ $(document).ready(function () {
 
             return function (video) {
                 var currentVideo = $videoBg.attr('src');
-                if (currentVideo !== video + '.mp4' && currentVideo !== video + '.ogv') {
+                if ((currentVideo !== video + '.mp4' && currentVideo !== video + '.ogv') || $videoBg.paused) {
                     BV.show(video + '.mp4', { ambient: true, altSource: video + '.ogv' });
                 }
             };
         })();
+
+        var stopVideo = function () {
+            BV.getPlayer().pause();
+        };
 
         $('.slide--home').waypoint(function () {
             changeVideo('media/DSC_2710');
@@ -45,11 +49,18 @@ $(document).ready(function () {
             changeVideo('media/DSC_2760_dark');
         }, { offset: '-100%' });
 
-        $('.slide--snake').waypoint(function () {
+        $('.slide--impressions').waypoint(function () {
             changeVideo('media/DSC_2725');
         }, { offset: '100%' });
-        $('.slide--snake').waypoint(function () {
+        $('.slide--impressions').waypoint(function () {
             changeVideo('media/DSC_2725');
+        }, { offset: '-100%' });
+
+        $('.slide--code').waypoint(function () {
+            stopVideo();
+        }, { offset: '100%' });
+        $('.slide--code').waypoint(function () {
+            stopVideo();
         }, { offset: '-100%' });
 
     } else {
