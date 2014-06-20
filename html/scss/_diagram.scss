@@ -70,6 +70,15 @@
     &__twitter {
         background-image: url(../media/icons/twitter-icon-white.svg);
     }
+    &__zhdk {
+        background-image: url(../media/icons/zhdk_logo_de-en_neg.svg);
+        float: left;
+        width: 300px;
+        height: 100px;
+        margin-top: 0px;
+        padding-top: 0px;
+        background-position: -32px center;
+    }
     &__frame {
         &--split {
             width:66%;
