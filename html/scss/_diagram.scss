@@ -72,12 +72,13 @@
     }
     &__zhdk {
         background-image: url(../media/icons/zhdk_logo_de-en_neg.svg);
-        float: left;
-        width: 300px;
-        height: 100px;
+        width: 400px;
+        height: 140px;
         margin-top: 0px;
+        margin-left: auto;
+        margin-right: auto;
         padding-top: 0px;
-        background-position: -32px center;
+        background-position: center;
     }
     &__frame {
         &--split {
