@@ -6,6 +6,8 @@ This is the code repository the installation produced and the experiments conduc
 
 [![Code Climate](https://codeclimate.com/github/d-simon/interactlight.png)](https://codeclimate.com/github/d-simon/interactlight)
 
+View the documentation here: [http://d-simon.github.io/interactlight](http://d-simon.github.io/interactlight)
+
 ##Overview
 - `server-interact-light.js` is the main entry point for the installation.
 
